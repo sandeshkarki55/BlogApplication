@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BlogListModel } from 'src/app/models/blog.list.model';
+import { BlogListViewModel } from 'src/app/models/blog.list.view.model';
 
 @Component({
   selector: 'app-blog',
@@ -7,14 +7,14 @@ import { BlogListModel } from 'src/app/models/blog.list.model';
   styleUrls: ['./blog.component.sass']
 })
 export class BlogComponent implements OnInit {
-  Blogs: Array<BlogListModel>;
+  Blogs: Array<BlogListViewModel>;
   constructor() {
-    const blog1: BlogListModel = {
+    const blog1: BlogListViewModel = {
       Title: 'Blog 1',
       ShortDescription: 'Hello'
     };
 
-    const blog2: BlogListModel = {
+    const blog2: BlogListViewModel = {
       Title: 'Blog 2',
       ShortDescription: 'Hello'
     };
