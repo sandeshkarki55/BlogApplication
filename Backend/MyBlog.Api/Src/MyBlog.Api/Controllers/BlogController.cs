@@ -39,11 +39,13 @@ namespace MyBlog.Api.Controllers
 
                     await _context.Blogs.AddAsync(blog);
                     await _context.SaveChangesAsync();
+
+                    transaction.Commit();
                 }
 
                 return Ok(new ResponseModel
                 {
-                    Message = "Failed to create a blog post.",
+                    Message = "Blog post creaded successfully.",
                     BlogStatusCode = MyBlogStatusCode.Created,
                     Data = new { CreatedAt = "api/Blog", Id = blog.Id }
                 });
@@ -63,7 +65,7 @@ namespace MyBlog.Api.Controllers
         {
             try
             {
-                var blogs = await _context.Blogs.Select(x => new BlogListViewModel
+                var blogs = await _context.Blogs.OrderBy(x=>x.CreatedDate).Select(x => new BlogListViewModel
                 {
                     Title = x.Title,
                     ShortDescription = x.Description
@@ -71,7 +73,7 @@ namespace MyBlog.Api.Controllers
 
                 return Ok(new ResponseModel
                 {
-                    Message = "Failed to create a blog post.",
+                    Message = "Blogs fetched successfully.",
                     BlogStatusCode = MyBlogStatusCode.Ok,
                     Data = blogs
                 });

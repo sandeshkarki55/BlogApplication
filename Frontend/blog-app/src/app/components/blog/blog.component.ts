@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BlogListViewModel } from 'src/app/models/blog.list.view.model';
-
+import { environment } from 'src/environments/environment';
+import { BlogService } from 'src/app/services/blog/blog.service';
 @Component({
   selector: 'app-blog',
   templateUrl: './blog.component.html',
@@ -8,22 +9,12 @@ import { BlogListViewModel } from 'src/app/models/blog.list.view.model';
 })
 export class BlogComponent implements OnInit {
   Blogs: Array<BlogListViewModel>;
-  constructor() {
-    const blog1: BlogListViewModel = {
-      Title: 'Blog 1',
-      ShortDescription: 'Hello'
-    };
-
-    const blog2: BlogListViewModel = {
-      Title: 'Blog 2',
-      ShortDescription: 'Hello'
-    };
-    this.Blogs = [
-      blog1, blog2, blog2, blog2, blog2, blog2, blog2, blog2
-    ];
+  constructor(private blogService: BlogService) {
   }
 
-  ngOnInit() {
-  }
+  async ngOnInit() {
+    const blogResponse = await this.blogService.getBlogs();
 
+    this.Blogs = blogResponse.data.Data;
+  }
 }
