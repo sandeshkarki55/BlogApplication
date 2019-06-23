@@ -10,6 +10,9 @@ import { BlogComponent } from './components/blog/blog.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { BlogListComponent } from './components/blog-list/blog-list.component';
 import { RightWidgetComponent } from './components/right-widget/right-widget.component';
+import { CreateBlogFormComponent } from './components/create-blog-form/create-blog-form.component';
+import { BlogCreateViewModel } from './models/blog.create.view.model';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const appRoutes: Routes = [
   { path: 'blog', component: BlogComponent },
@@ -17,6 +20,10 @@ const appRoutes: Routes = [
   {
     path: 'home',
     component: HomeComponent
+  },
+  {
+    path: 'blog/create',
+    component: CreateBlogFormComponent
   },
   {
     path: '',
@@ -35,11 +42,13 @@ const appRoutes: Routes = [
     PageNotFoundComponent,
     BlogComponent,
     BlogListComponent,
-    RightWidgetComponent
+    RightWidgetComponent,
+    CreateBlogFormComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
-    BrowserModule
+    BrowserModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,9 +1,0 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
-    <AssemblyName>MyBlog.Common</AssemblyName>
-    <RootNamespace>MyBlog.Common</RootNamespace>
-  </PropertyGroup>
-
-</Project>

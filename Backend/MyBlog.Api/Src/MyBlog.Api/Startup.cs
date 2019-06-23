@@ -5,10 +5,12 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-using MyBlog.DAL.Data;
+using MyBlog.API.Extensions;
+using MyBlog.Application.Interfaces;
+using MyBlog.Persistence;
 using Newtonsoft.Json.Serialization;
 
-namespace MyBlog.Api
+namespace MyBlog.API
 {
     public class Startup
     {
@@ -22,23 +24,14 @@ namespace MyBlog.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc()
-                .AddJsonOptions(options => options.SerializerSettings.ContractResolver = new DefaultContractResolver())
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddJsonOptions(options =>
+                    options.SerializerSettings.ContractResolver = new DefaultContractResolver());
 
-            services.AddDbContext<MyBlogContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<IMyBlogDbContext, MyBlogDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("MyBlogDatabase")));
 
-            services.AddCors(options =>
-            {
-                options.AddPolicy("cors1",
-                builder =>
-                {
-                    builder.AllowAnyHeader();
-                    builder.AllowAnyMethod();
-                    builder.AllowAnyOrigin();
-                });
-            });
+            services.RegisterCategoryDependencies();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,15 +41,7 @@ namespace MyBlog.Api
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                //app.UseHsts();
-            }
 
-            app.UseCors("cors1");
-
-            //app.UseHttpsRedirection();
             app.UseMvc();
         }
     }
