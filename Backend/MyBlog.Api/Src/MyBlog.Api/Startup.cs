@@ -45,6 +45,16 @@ namespace MyBlog.API
 
             });
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("MyPolicy", builder =>
+                {
+                    builder.AllowAnyOrigin();
+                    builder.AllowAnyMethod();
+                    builder.AllowAnyHeader();
+                });
+            });
+
             services.RegisterCategoryDependencies();
         }
 
@@ -63,6 +73,7 @@ namespace MyBlog.API
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseCors("MyPolicy");
             app.UseMvc();
         }
     }

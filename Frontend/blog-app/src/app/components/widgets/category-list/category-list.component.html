@@ -1,0 +1,10 @@
+<div class="py-1">
+  <div class='card'>
+    <div class="card-header">
+      Categories
+    </div>
+    <ul class="list-group list-group-flush">
+      <li *ngFor="let category of Categories" class="list-group-item">{{category.Name}}&nbsp; <span class="badge badge-info badge-pill">{{category.NoOfBlogs}}</span></li>
+    </ul>
+  </div>
+</div>

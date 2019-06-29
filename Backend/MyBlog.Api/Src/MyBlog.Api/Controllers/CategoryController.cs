@@ -1,13 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Mvc;
 
-using Microsoft.AspNetCore.Mvc;
-
+using MyBlog.API.Models.Common;
 using MyBlog.Application.Categories.Commands.AddCategory;
 using MyBlog.Application.Categories.Commands.DeleteCategory;
 using MyBlog.Application.Categories.Queries.GetCategories;
 using MyBlog.Application.Categories.Queries.GetCategory;
 using MyBlog.Application.Interfaces;
+
+using System.Collections.Generic;
+using System.Net;
+using System.Threading.Tasks;
 
 namespace MyBlog.API.Controllers
 {
@@ -42,8 +44,8 @@ namespace MyBlog.API.Controllers
         [ProducesResponseType(201)]
         public async Task<IActionResult> CreateCategory([FromBody]AddCategoryCommand command)
         {
-            int categoryId = await _addCategoryCommandHandler.Handle(command, CancellationToken);
-            return CreatedAtRoute("Get", new { categoryId });
+            int id = await _addCategoryCommandHandler.Handle(command, CancellationToken);
+            return CreatedAtAction(nameof(Get), new { id }, command);
         }
 
         /// <summary>
@@ -56,7 +58,12 @@ namespace MyBlog.API.Controllers
         public async Task<IActionResult> GetAll()
         {
             List<CategoryListViewModel> categories = await _getCategoriesRequestHandler.Handle(new GetCategoriesQuery());
-            return Ok(categories);
+            return Ok(new ResponseModel
+            {
+                Message = "All categories fetched successfully.",
+                Data = categories,
+                BlogStatusCode = (int)HttpStatusCode.OK
+            });
         }
 
         /// <summary>
@@ -78,7 +85,12 @@ namespace MyBlog.API.Controllers
                 return NotFound();
             }
 
-            return Ok(category);
+            return Ok(new ResponseModel
+            {
+                Message = "category fetched successfully.",
+                Data = category,
+                BlogStatusCode = (int)HttpStatusCode.OK
+            });
         }
 
         /// <summary>

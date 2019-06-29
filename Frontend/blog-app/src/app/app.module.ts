@@ -13,6 +13,7 @@ import { RightWidgetComponent } from './components/right-widget/right-widget.com
 import { CreateBlogFormComponent } from './components/create-blog-form/create-blog-form.component';
 import { BlogCreateViewModel } from './models/blog.create.view.model';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CategoryListComponent } from './components/widgets/category-list/category-list.component';
 
 const appRoutes: Routes = [
   { path: 'blog', component: BlogComponent },
@@ -43,7 +44,8 @@ const appRoutes: Routes = [
     BlogComponent,
     BlogListComponent,
     RightWidgetComponent,
-    CreateBlogFormComponent
+    CreateBlogFormComponent,
+    CategoryListComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),

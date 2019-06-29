@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { BlogListViewModel } from 'src/app/models/blog.list.view.model';
-import { environment } from 'src/environments/environment';
 import { BlogService } from 'src/app/services/blog/blog.service';
 @Component({
   selector: 'app-blog',
