@@ -80,11 +80,6 @@ namespace MyBlog.API.Controllers
         {
             CategoryDetailViewModel category = await _getCategoryRequestHandler.Handle(new GetCategoryQuery { Id = id });
 
-            if (category == null)
-            {
-                return NotFound();
-            }
-
             return Ok(new ResponseModel
             {
                 Message = "category fetched successfully.",

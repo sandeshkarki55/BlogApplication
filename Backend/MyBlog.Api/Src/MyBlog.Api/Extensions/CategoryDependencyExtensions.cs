@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 using MyBlog.Application.Categories.Commands.AddCategory;
 using MyBlog.Application.Categories.Commands.DeleteCategory;
@@ -8,9 +6,11 @@ using MyBlog.Application.Categories.Queries.GetCategories;
 using MyBlog.Application.Categories.Queries.GetCategory;
 using MyBlog.Application.Interfaces;
 
+using System.Collections.Generic;
+
 namespace MyBlog.API.Extensions
 {
-    public static class CategoryDevendencyExtensions
+    public static class CategoryDependencyExtensions
     {
         public static IServiceCollection RegisterCategoryDependencies(this IServiceCollection services)
         {

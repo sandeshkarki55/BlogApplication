@@ -25,7 +25,7 @@ namespace MyBlog.Persistence.Configurations
                 .HasMaxLength(50);
 
             builder.Property(x => x.ShortDescription)
-                .HasMaxLength(200)
+                .HasMaxLength(350)
                 .IsRequired();
 
             builder.HasOne(x => x.Category)

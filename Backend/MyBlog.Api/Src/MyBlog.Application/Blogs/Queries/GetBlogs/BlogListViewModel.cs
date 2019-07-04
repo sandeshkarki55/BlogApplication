@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace MyBlog.Application.Blogs.Queries.GetBlog
+namespace MyBlog.Application.Blogs.Queries.GetBlogs
 {
-    public class BlogDetailViewModel
+    public class BlogListViewModel
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public string Description { get; set; }
+        public string ShortDescription { get; set; }
         public string UserName { get; set; }
         public DateTime PostedDate { get; set; }
         public string Tags { get; set; }

@@ -1,10 +1,11 @@
-﻿using System.Threading.Tasks;
-
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 using MyBlog.Application.Exceptions;
 using MyBlog.Application.Interfaces;
 using MyBlog.Domain.Entities;
+
+using System;
+using System.Threading.Tasks;
 
 namespace MyBlog.Application.Blogs.Queries.GetBlog
 {
@@ -19,7 +20,7 @@ namespace MyBlog.Application.Blogs.Queries.GetBlog
 
         public async Task<BlogDetailViewModel> Handle(GetBlogQuery request)
         {
-            var blog = await _context.Blogs.FirstOrDefaultAsync(x => x.Id == request.Id);
+            var blog = await _context.Blogs.Include(x=>x.Category).FirstOrDefaultAsync(x => x.Id == request.Id);
 
             if (blog == null)
             {
@@ -28,7 +29,13 @@ namespace MyBlog.Application.Blogs.Queries.GetBlog
 
             var viewModel = new BlogDetailViewModel
             {
-                Id = blog.Id
+                Id = blog.Id,
+                Description= blog.Description,
+                CategoryName= blog.Category.Name,
+                PostedDate = Convert.ToDateTime(blog.PostedDate),
+                Tags= blog.Tags,
+                Title= blog.Title,
+                UserName= blog.UserId
             };
 
             return viewModel;

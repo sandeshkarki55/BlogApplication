@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 using MyBlog.Application.Interfaces;
+
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace MyBlog.Application.Categories.Queries.GetCategories
 {
@@ -23,7 +23,7 @@ namespace MyBlog.Application.Categories.Queries.GetCategories
             {
                 Id = x.Id,
                 Name = x.Name,
-                NoOfBlogs = x.Blogs.Count()
+                NoOfBlogs = x.Blogs.Where(y => !y.IsDraft).Count()
             }).ToListAsync();
 
             return categories;

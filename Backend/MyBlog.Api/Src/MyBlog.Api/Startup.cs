@@ -8,8 +8,11 @@ using Microsoft.Extensions.DependencyInjection;
 using MyBlog.API.Extensions;
 using MyBlog.Application.Interfaces;
 using MyBlog.Persistence;
+
 using Newtonsoft.Json.Serialization;
+
 using Swashbuckle.AspNetCore.Swagger;
+
 using System;
 using System.IO;
 using System.Reflection;
@@ -56,6 +59,7 @@ namespace MyBlog.API
             });
 
             services.RegisterCategoryDependencies();
+            services.RegisterBlogDependencies();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
