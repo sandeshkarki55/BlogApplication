@@ -4,6 +4,7 @@ using MyBlog.API.Models.Common;
 using MyBlog.Application.Blogs.Commands.AddBlog;
 using MyBlog.Application.Blogs.Queries.GetBlog;
 using MyBlog.Application.Blogs.Queries.GetBlogs;
+using MyBlog.Application.Blogs.Queries.GetRecentBlogs;
 using MyBlog.Application.Interfaces;
 
 using System.Collections.Generic;
@@ -20,14 +21,17 @@ namespace MyBlog.API.Controllers
         private readonly ICommandHandler<AddBlogCommand> _addBlogCommandHandler;
         private readonly IRequestHandler<GetBlogsQuery, List<BlogListViewModel>> _getBlogsRequestHandler;
         private readonly IRequestHandler<GetBlogQuery, BlogDetailViewModel> _getBlogQueryHandler;
+        private readonly IRequestHandler<GetRecentBlogsQuery, List<RecentBlogViewModel>> _getRecentBlogQueryHandler;
 
         public BlogController(ICommandHandler<AddBlogCommand> addBlogCommandHandler,
             IRequestHandler<GetBlogsQuery, List<BlogListViewModel>> getBlogsRequestHandler,
-            IRequestHandler<GetBlogQuery,BlogDetailViewModel> getBlogQueryHandler)
+            IRequestHandler<GetBlogQuery, BlogDetailViewModel> getBlogQueryHandler,
+            IRequestHandler<GetRecentBlogsQuery, List<RecentBlogViewModel>> getRecentBlogQueryHandler)
         {
             _addBlogCommandHandler = addBlogCommandHandler;
             _getBlogsRequestHandler = getBlogsRequestHandler;
             _getBlogQueryHandler = getBlogQueryHandler;
+            _getRecentBlogQueryHandler = getRecentBlogQueryHandler;
         }
 
         /// <summary>
@@ -58,6 +62,20 @@ namespace MyBlog.API.Controllers
             {
                 Message = "Blogs fetched successfully.",
                 Data = blogs,
+                BlogStatusCode = (int)HttpStatusCode.OK
+            });
+        }
+
+        [HttpGet]
+        [Route("Recent")]
+        public async Task<IActionResult> GetRecent()
+        {
+            var recentBlogs = await _getRecentBlogQueryHandler.Handle(new GetRecentBlogsQuery());
+
+            return Ok(new ResponseModel
+            {
+                Message = "Recent Blogs fetched successfully.",
+                Data = recentBlogs,
                 BlogStatusCode = (int)HttpStatusCode.OK
             });
         }

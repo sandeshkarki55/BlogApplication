@@ -4,6 +4,7 @@ import { environment } from 'src/environments/environment';
 import { BlogListViewModel } from 'src/app/models/blog/blog.list.view.model';
 import { BlogCreateViewModel } from 'src/app/models/blog/blog.create.view.model';
 import { BlogDetailViewModel } from 'src/app/models/blog/blog.detail.view.model';
+import { RecentBlogViewModel } from 'src/app/models/blog/recent.blog.view.model';
 
 @Injectable({
   providedIn: 'root'
@@ -22,5 +23,9 @@ export class BlogService {
 
   async getBlog(id: number): Promise<AxiosResponse<ResponseModel<BlogDetailViewModel>>> {
     return await axios.get(`${environment.backendUri}api/blog/${id}`);
+  }
+
+  async getRecentBlogs(): Promise<AxiosResponse<ResponseModel<RecentBlogViewModel[]>>> {
+    return await axios.get(`${environment.backendUri}api/blog/Recent`);
   }
 }

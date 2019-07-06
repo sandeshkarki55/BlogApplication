@@ -29,14 +29,16 @@ export class CreateBlogFormComponent implements OnInit {
   isSubmitted = false;
 
   async onSubmit() {
-    this.isSubmitted = true;
-    this.blogForm.controls['isDraft'].setValue(false);
-    await this.blogService.saveBlog(this.blogForm.value);
-    this.router.navigate(['/', 'blog']);
-  }
-  async onDraftSave() {
-    this.isSubmitted = true;
-    this.blogForm.controls['isDraft'].setValue(true);
+    let buttonType: string= document.activeElement.getAttribute("Name");
+
+    if (buttonType === 'Submit') {
+      this.blogForm.controls['isDraft'].setValue(false);
+    }
+
+    if (buttonType === 'SaveDraft') {
+      this.blogForm.controls['isDraft'].setValue(true);
+    }
+
     await this.blogService.saveBlog(this.blogForm.value);
     this.router.navigate(['/', 'blog']);
   }

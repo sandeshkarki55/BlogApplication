@@ -10,7 +10,7 @@ export class BlogListComponent implements OnInit {
 
   @Input() blog: BlogListViewModel;
   constructor() { }
-
+  
   ngOnInit() {
   }
 

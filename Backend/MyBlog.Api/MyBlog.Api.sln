@@ -15,11 +15,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{81BD54E9-62D9-4325-9706-3FC7398BCCE8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBlog.Domain", "Src\MyBlog.Domain\MyBlog.Domain.csproj", "{75C8D373-609A-43ED-9BE5-FFFDE7BFB6A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyBlog.Domain", "Src\MyBlog.Domain\MyBlog.Domain.csproj", "{75C8D373-609A-43ED-9BE5-FFFDE7BFB6A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBlog.Common", "Src\MyBlog.Common\MyBlog.Common.csproj", "{7B6861A4-1766-441E-A2AF-FB686927A796}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyBlog.Common", "Src\MyBlog.Common\MyBlog.Common.csproj", "{7B6861A4-1766-441E-A2AF-FB686927A796}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBlog.Infrastructure", "Src\MyBlog.Infrastructure\MyBlog.Infrastructure.csproj", "{EFD535F2-1AD6-43DE-A796-56CC64AD5F2F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyBlog.Infrastructure", "Src\MyBlog.Infrastructure\MyBlog.Infrastructure.csproj", "{EFD535F2-1AD6-43DE-A796-56CC64AD5F2F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{B210C3FA-3DC0-4713-9DC8-A6D24D882737}"
 EndProject
@@ -27,9 +27,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{C841C2B0-664
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyBlog.Persistence", "Src\MyBlog.Persistence\MyBlog.Persistence.csproj", "{AD10F574-78D2-432C-BB5C-BF20657971B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBlog.API", "Src\MyBlog.API\MyBlog.API.csproj", "{555AD1C2-6EA0-4C64-849B-E70245AE9DB0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyBlog.API", "Src\MyBlog.API\MyBlog.API.csproj", "{555AD1C2-6EA0-4C64-849B-E70245AE9DB0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBlog.Application", "Src\MyBlog.Application\MyBlog.Application.csproj", "{EA22DD6A-E1B8-4868-99D2-ED347601B311}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MyBlog.Application", "Src\MyBlog.Application\MyBlog.Application.csproj", "{EA22DD6A-E1B8-4868-99D2-ED347601B311}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{9E96E45D-7F3A-43FB-A1A4-B9541E195C7D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -78,6 +80,7 @@ Global
 		{AD10F574-78D2-432C-BB5C-BF20657971B7} = {1AE9DCCF-491D-415C-AB90-D2ABE8941B72}
 		{555AD1C2-6EA0-4C64-849B-E70245AE9DB0} = {C841C2B0-664A-4269-AC72-4F6B02E43283}
 		{EA22DD6A-E1B8-4868-99D2-ED347601B311} = {B210C3FA-3DC0-4713-9DC8-A6D24D882737}
+		{9E96E45D-7F3A-43FB-A1A4-B9541E195C7D} = {494546C8-7D37-4CA6-A415-500422D19030}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1E052509-40AC-415F-BDF2-9F1A28BB81AE}

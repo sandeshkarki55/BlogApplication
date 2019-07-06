@@ -1,10 +1,5 @@
 <div class="container">
   <div class="row">
-    <div class="col">
-      <a class="btn btn-outline-primary float-right" routerLink="/blog/create" routerLinkActive="active">Create</a>
-    </div>
-  </div>
-  <div class="row">
     <div class="container">
       <div *ngFor="let blog of Blogs" class="my-2 row">
         <app-blog-list [blog]="blog" class="col-md-12"></app-blog-list>
