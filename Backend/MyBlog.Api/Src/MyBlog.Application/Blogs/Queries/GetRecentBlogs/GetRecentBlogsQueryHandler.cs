@@ -19,7 +19,7 @@ namespace MyBlog.Application.Blogs.Queries.GetRecentBlogs
 
         public async Task<List<RecentBlogViewModel>> Handle(GetRecentBlogsQuery request)
         {
-            var recentBlogs = await _myBlogDbContext.Blogs.Where(x => !x.IsDraft).OrderBy(x => x.PostedDate).Select(x => new RecentBlogViewModel
+            var recentBlogs = await _myBlogDbContext.Blogs.Where(x => !x.IsDraft).OrderByDescending(x => x.PostedDate).Select(x => new RecentBlogViewModel
             {
                 Id = x.Id,
                 Title = x.Title

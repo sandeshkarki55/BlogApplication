@@ -20,7 +20,7 @@ namespace MyBlog.Application.Blogs.Queries.GetBlogs
 
         public async Task<List<BlogListViewModel>> Handle(GetBlogsQuery request)
         {
-            var blogs = await _myBlogDbContext.Blogs.Where(x => !x.IsDraft).OrderBy(x => x.PostedDate).Include(x => x.Category).Select(x => new BlogListViewModel
+            var blogs = await _myBlogDbContext.Blogs.Where(x => !x.IsDraft).OrderByDescending(x => x.PostedDate).Include(x => x.Category).Select(x => new BlogListViewModel
             {
                 Id = x.Id,
                 Title = x.Title,
