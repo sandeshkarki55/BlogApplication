@@ -18,7 +18,7 @@ namespace MyBlog.Application.Blogs.Queries.GetBlogs
             _myBlogDbContext = myBlogDbContext;
         }
 
-        public async Task<List<BlogListViewModel>> Handle(GetBlogsQuery request)
+        public async Task<List<BlogListViewModel>> HandleAsync(GetBlogsQuery request)
         {
             var blogs = await _myBlogDbContext.Blogs.Where(x => !x.IsDraft).OrderByDescending(x => x.PostedDate).Include(x => x.Category).Select(x => new BlogListViewModel
             {
@@ -28,7 +28,7 @@ namespace MyBlog.Application.Blogs.Queries.GetBlogs
                 PostedDate = Convert.ToDateTime(x.PostedDate),
                 ShortDescription = x.ShortDescription,
                 Tags = x.Tags,
-                UserName = x.UserId
+                UserName = x.UserName
             }).ToListAsync();
 
             return blogs;

@@ -44,7 +44,7 @@ namespace MyBlog.API.Controllers
         [ProducesResponseType(201)]
         public async Task<IActionResult> CreateCategory([FromBody]AddCategoryCommand command)
         {
-            int id = await _addCategoryCommandHandler.Handle(command, CancellationToken);
+            int id = await _addCategoryCommandHandler.HandleAsync(command, CancellationToken);
             return CreatedAtAction(nameof(Get), new { id }, command);
         }
 
@@ -57,7 +57,7 @@ namespace MyBlog.API.Controllers
         [ProducesResponseType(200)]
         public async Task<IActionResult> GetAll()
         {
-            List<CategoryListViewModel> categories = await _getCategoriesRequestHandler.Handle(new GetCategoriesQuery());
+            List<CategoryListViewModel> categories = await _getCategoriesRequestHandler.HandleAsync(new GetCategoriesQuery());
             return Ok(new ResponseModel
             {
                 Message = "All categories fetched successfully.",
@@ -78,7 +78,7 @@ namespace MyBlog.API.Controllers
         [ProducesResponseType(404)]
         public async Task<IActionResult> Get([FromRoute]int id)
         {
-            CategoryDetailViewModel category = await _getCategoryRequestHandler.Handle(new GetCategoryQuery { Id = id });
+            CategoryDetailViewModel category = await _getCategoryRequestHandler.HandleAsync(new GetCategoryQuery { Id = id });
 
             return Ok(new ResponseModel
             {
@@ -98,7 +98,7 @@ namespace MyBlog.API.Controllers
         [ProducesResponseType(204)]
         public async Task<IActionResult> Delete([FromRoute]int id)
         {
-            await _deleteCategoryCommandHandler.Handle(new DeleteCategoryCommand { Id = id }, CancellationToken);
+            await _deleteCategoryCommandHandler.HandleAsync(new DeleteCategoryCommand { Id = id }, CancellationToken);
             return NoContent();
         }
     }

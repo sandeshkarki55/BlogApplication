@@ -17,7 +17,7 @@ namespace MyBlog.Application.Blogs.Commands.AddBlog
             _myBlogDbContext = myBlogDbContext;
         }
 
-        public async Task Handle(AddBlogCommand command, CancellationToken cancellationToken)
+        public async Task HandleAsync(AddBlogCommand command, CancellationToken cancellationToken)
         {
             Blog blog = new Blog
             {
@@ -25,7 +25,7 @@ namespace MyBlog.Application.Blogs.Commands.AddBlog
                 Description = command.Description,
                 IsDraft = command.IsDraft,
                 CategoryId = command.CategoryId,
-                UserId = "Sandesh Karki"
+                UserName = "Sandesh Karki"
             };
 
             var htmlTagStrippedDescription = HtmlStripper.StripHTML(command.Description);

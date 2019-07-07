@@ -44,7 +44,7 @@ namespace MyBlog.API.Controllers
         [ProducesResponseType(204)]
         public async Task<IActionResult> SaveBlog(AddBlogCommand command)
         {
-            await _addBlogCommandHandler.Handle(command, CancellationToken);
+            await _addBlogCommandHandler.HandleAsync(command, CancellationToken);
             return NoContent();
         }
 
@@ -57,7 +57,7 @@ namespace MyBlog.API.Controllers
         [ProducesResponseType(200)]
         public async Task<IActionResult> GetAll()
         {
-            var blogs = await _getBlogsRequestHandler.Handle(new GetBlogsQuery());
+            var blogs = await _getBlogsRequestHandler.HandleAsync(new GetBlogsQuery());
             return Ok(new ResponseModel
             {
                 Message = "Blogs fetched successfully.",
@@ -70,7 +70,7 @@ namespace MyBlog.API.Controllers
         [Route("Recent")]
         public async Task<IActionResult> GetRecent()
         {
-            var recentBlogs = await _getRecentBlogQueryHandler.Handle(new GetRecentBlogsQuery());
+            var recentBlogs = await _getRecentBlogQueryHandler.HandleAsync(new GetRecentBlogsQuery());
 
             return Ok(new ResponseModel
             {
@@ -92,7 +92,7 @@ namespace MyBlog.API.Controllers
         [ProducesResponseType(404)]
         public async Task<IActionResult> GetBlog(int id)
         {
-            var blog = await _getBlogQueryHandler.Handle(new GetBlogQuery { Id = id });
+            var blog = await _getBlogQueryHandler.HandleAsync(new GetBlogQuery { Id = id });
             return Ok(new ResponseModel
             {
                 Message = $"Blog with id {id} fetched successfully.",

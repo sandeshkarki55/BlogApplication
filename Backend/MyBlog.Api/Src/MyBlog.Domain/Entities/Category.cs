@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using MyBlog.Domain.Entities.BaseEntities;
+
+using System.Collections.Generic;
 
 namespace MyBlog.Domain.Entities
 {

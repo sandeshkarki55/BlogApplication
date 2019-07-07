@@ -14,6 +14,7 @@ namespace MyBlog.Persistence
 
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<UserDetail> UserDetails { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

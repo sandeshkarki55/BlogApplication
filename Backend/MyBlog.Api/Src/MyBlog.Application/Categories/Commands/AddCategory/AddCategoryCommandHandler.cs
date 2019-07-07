@@ -15,7 +15,7 @@ namespace MyBlog.Application.Categories.Commands.AddCategory
             _context = context;
         }
 
-        public async Task<int> Handle(AddCategoryCommand command, CancellationToken cancellationToken)
+        public async Task<int> HandleAsync(AddCategoryCommand command, CancellationToken cancellationToken)
         {
             var category = new Category
             {

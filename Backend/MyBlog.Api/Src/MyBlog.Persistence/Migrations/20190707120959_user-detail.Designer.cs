@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MyBlog.Persistence;
 
 namespace MyBlog.Persistence.Migrations
 {
     [DbContext(typeof(MyBlogDbContext))]
-    partial class MyBlogDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190707120959_user-detail")]
+    partial class userdetail
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -84,10 +86,6 @@ namespace MyBlog.Persistence.Migrations
                     b.Property<string>("Address")
                         .HasMaxLength(50);
 
-                    b.Property<DateTime?>("DeleteDateTime");
-
-                    b.Property<int>("DeletedBy");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(75);
@@ -99,8 +97,6 @@ namespace MyBlog.Persistence.Migrations
                         .HasMaxLength(50);
 
                     b.Property<string>("GithubUrl");
-
-                    b.Property<bool>("IsDeleted");
 
                     b.Property<string>("LastName")
                         .HasMaxLength(50);
@@ -118,7 +114,7 @@ namespace MyBlog.Persistence.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.ToTable("UserDetails");
+                    b.ToTable("UserDetail");
                 });
 
             modelBuilder.Entity("MyBlog.Domain.Entities.Blog", b =>

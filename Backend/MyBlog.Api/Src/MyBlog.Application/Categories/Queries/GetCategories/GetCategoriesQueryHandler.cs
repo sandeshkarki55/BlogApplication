@@ -17,7 +17,7 @@ namespace MyBlog.Application.Categories.Queries.GetCategories
             _context = context;
         }
 
-        public async Task<List<CategoryListViewModel>> Handle(GetCategoriesQuery request)
+        public async Task<List<CategoryListViewModel>> HandleAsync(GetCategoriesQuery request)
         {
             var categories = await _context.Categories.Select(x => new CategoryListViewModel
             {

@@ -17,7 +17,7 @@ namespace MyBlog.Application.Categories.Commands.DeleteCategory
             _context = context;
         }
 
-        public async Task Handle(DeleteCategoryCommand command, CancellationToken cancellationToken)
+        public async Task HandleAsync(DeleteCategoryCommand command, CancellationToken cancellationToken)
         {
             var category = await _context.Categories.FindAsync(command.Id);
 

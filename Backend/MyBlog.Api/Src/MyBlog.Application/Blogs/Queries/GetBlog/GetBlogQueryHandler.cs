@@ -18,7 +18,7 @@ namespace MyBlog.Application.Blogs.Queries.GetBlog
             _context = context;
         }
 
-        public async Task<BlogDetailViewModel> Handle(GetBlogQuery request)
+        public async Task<BlogDetailViewModel> HandleAsync(GetBlogQuery request)
         {
             var blog = await _context.Blogs.Include(x=>x.Category).FirstOrDefaultAsync(x => x.Id == request.Id);
 
@@ -35,7 +35,7 @@ namespace MyBlog.Application.Blogs.Queries.GetBlog
                 PostedDate = Convert.ToDateTime(blog.PostedDate),
                 Tags= blog.Tags,
                 Title= blog.Title,
-                UserName= blog.UserId
+                UserName= blog.UserName
             };
 
             return viewModel;

@@ -17,7 +17,7 @@ namespace MyBlog.Application.Blogs.Queries.GetRecentBlogs
             _myBlogDbContext = myBlogDbContext;
         }
 
-        public async Task<List<RecentBlogViewModel>> Handle(GetRecentBlogsQuery request)
+        public async Task<List<RecentBlogViewModel>> HandleAsync(GetRecentBlogsQuery request)
         {
             var recentBlogs = await _myBlogDbContext.Blogs.Where(x => !x.IsDraft).OrderByDescending(x => x.PostedDate).Select(x => new RecentBlogViewModel
             {

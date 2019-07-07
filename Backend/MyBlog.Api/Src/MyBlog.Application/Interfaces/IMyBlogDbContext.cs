@@ -1,8 +1,9 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore;
 
-using Microsoft.EntityFrameworkCore;
 using MyBlog.Domain.Entities;
+
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MyBlog.Application.Interfaces
 {
@@ -10,6 +11,8 @@ namespace MyBlog.Application.Interfaces
     {
         DbSet<Blog> Blogs { get; set; }
         DbSet<Category> Categories { get; set; }
+        DbSet<UserDetail> UserDetails { get; set; }
+
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }
 }
