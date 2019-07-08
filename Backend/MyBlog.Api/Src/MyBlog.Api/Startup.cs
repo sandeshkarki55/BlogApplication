@@ -60,6 +60,7 @@ namespace MyBlog.API
 
             services.RegisterCategoryDependencies();
             services.RegisterBlogDependencies();
+            services.RegisterUserDependencies();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

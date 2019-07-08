@@ -1,4 +1,6 @@
-﻿using MyBlog.Application.Exceptions;
+﻿using Microsoft.EntityFrameworkCore;
+
+using MyBlog.Application.Exceptions;
 using MyBlog.Application.Interfaces;
 using MyBlog.Domain.Entities;
 
@@ -17,7 +19,7 @@ namespace MyBlog.Application.Users.Queries.GetUser
 
         public async Task<UserDetailViewModel> HandleAsync(GetUserQuery request)
         {
-            var user = await _myBlogDbContext.UserDetails.FindAsync(request.Id);
+            var user = await _myBlogDbContext.UserDetails.FirstOrDefaultAsync(x => !x.IsDeleted && x.Id == request.Id);
 
             if (user == null)
             {

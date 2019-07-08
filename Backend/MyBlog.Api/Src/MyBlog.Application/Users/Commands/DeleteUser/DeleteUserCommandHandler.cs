@@ -1,4 +1,7 @@
-﻿using MyBlog.Application.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using MyBlog.Application.Exceptions;
+using MyBlog.Application.Interfaces;
+using MyBlog.Domain.Entities;
 
 using System;
 using System.Threading;
@@ -17,7 +20,12 @@ namespace MyBlog.Application.Users.Commands.DeleteUser
 
         public async Task HandleAsync(DeleteUserCommand command, CancellationToken cancellationToken)
         {
-            var user = await _myBlogDbContext.UserDetails.FindAsync(command.Id);
+            var user = await _myBlogDbContext.UserDetails.FirstOrDefaultAsync(x => !x.IsDeleted && x.Id == command.Id);
+
+            if (user == null)
+            {
+                throw new NotFoundException(nameof(UserDetail), command.Id);
+            }
 
             user.IsDeleted = true;
             user.DeleteDateTime = DateTime.UtcNow;

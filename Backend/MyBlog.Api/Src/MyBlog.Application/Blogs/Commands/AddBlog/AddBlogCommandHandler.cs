@@ -25,7 +25,7 @@ namespace MyBlog.Application.Blogs.Commands.AddBlog
                 Description = command.Description,
                 IsDraft = command.IsDraft,
                 CategoryId = command.CategoryId,
-                UserName = "Sandesh Karki"
+                UserName = command.UserName
             };
 
             var htmlTagStrippedDescription = HtmlStripper.StripHTML(command.Description);

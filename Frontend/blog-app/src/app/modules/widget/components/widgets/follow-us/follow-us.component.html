@@ -1,0 +1,26 @@
+<div class="py-1">
+  <div class='card'>
+    <div class="card-header">
+      Follow Me
+    </div>
+    <div class="card-body" *ngIf="userSocialLinks">
+      <div *ngIf="userSocialLinks.GithubUrl">
+        <a href="{{userSocialLinks.GithubUrl}}">
+            <fa-icon [icon]="['fas', 'coffee']"></fa-icon><i class="fab fa-github-square"></i></a>
+      </div>
+      <div *ngIf="userSocialLinks.LinkedinUrl">
+        <a href="{{userSocialLinks.LinkedinUrl}}">
+            <fa-icon [icon]="fa-linkedin"></fa-icon><i class="fab fa-linkedin"></i></a>
+      </div>
+      <div *ngIf="userSocialLinks.FacebookUrl">
+        <a href="{{userSocialLinks.FacebookUrl}}">
+            <fa-icon [icon]="fa-facebook-square"></fa-icon><i class="fab fa-facebook-square"></i></a>
+      </div>
+      <div *ngIf="userSocialLinks.TwitterUrl">
+        <a href="{{userSocialLinks.TwitterUrl}}"><fa-icon [icon]="fa-twitter-square"></fa-icon>
+          <i class="fab fa-twitter-square"></i></a>
+      </div>
+    </div>
+  </div>
+</div>
+<fa-icon [icon]="faCoffee"></fa-icon>

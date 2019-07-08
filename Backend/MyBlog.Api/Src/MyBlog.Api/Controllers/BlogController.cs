@@ -44,6 +44,8 @@ namespace MyBlog.API.Controllers
         [ProducesResponseType(204)]
         public async Task<IActionResult> SaveBlog(AddBlogCommand command)
         {
+            command.UserName = "sandeshkarki";
+
             await _addBlogCommandHandler.HandleAsync(command, CancellationToken);
             return NoContent();
         }
@@ -66,6 +68,12 @@ namespace MyBlog.API.Controllers
             });
         }
 
+        /// <summary>
+        /// Gets recent blogs.
+        /// </summary>
+        /// <returns></returns>
+        /// <response code="200">Gets latest blogs.</response>
+        [ProducesResponseType(200)]
         [HttpGet]
         [Route("Recent")]
         public async Task<IActionResult> GetRecent()

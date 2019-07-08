@@ -4,16 +4,20 @@ import { RightWidgetComponent } from './components/right-widget/right-widget.com
 import { CategoryListComponent } from './components/widgets/category-list/category-list.component';
 import { RouterModule } from '@angular/router';
 import { RecentPostsComponent } from './components/widgets/recent-posts/recent-posts.component';
+import { FollowUsComponent } from './components/widgets/follow-us/follow-us.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
     RightWidgetComponent,
     CategoryListComponent,
-    RecentPostsComponent
+    RecentPostsComponent,
+    FollowUsComponent
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    FontAwesomeModule
   ],
   exports: [
     RightWidgetComponent
