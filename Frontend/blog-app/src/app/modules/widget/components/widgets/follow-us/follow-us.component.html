@@ -5,22 +5,17 @@
     </div>
     <div class="card-body" *ngIf="userSocialLinks">
       <div *ngIf="userSocialLinks.GithubUrl">
-        <a href="{{userSocialLinks.GithubUrl}}">
-            <fa-icon [icon]="['fas', 'coffee']"></fa-icon><i class="fab fa-github-square"></i></a>
+        <a target="_blank" href="{{userSocialLinks.GithubUrl}}"><i class="fab fa-2x fa-github-square"></i></a>
       </div>
       <div *ngIf="userSocialLinks.LinkedinUrl">
-        <a href="{{userSocialLinks.LinkedinUrl}}">
-            <fa-icon [icon]="fa-linkedin"></fa-icon><i class="fab fa-linkedin"></i></a>
+        <a target="_blank" href="{{userSocialLinks.LinkedinUrl}}"><i class="fab fa-2x fa-linkedin"></i></a>
       </div>
       <div *ngIf="userSocialLinks.FacebookUrl">
-        <a href="{{userSocialLinks.FacebookUrl}}">
-            <fa-icon [icon]="fa-facebook-square"></fa-icon><i class="fab fa-facebook-square"></i></a>
+        <a target="_blank" href="{{userSocialLinks.FacebookUrl}}"><i class="fab fa-2x fa-facebook-square"></i></a>
       </div>
       <div *ngIf="userSocialLinks.TwitterUrl">
-        <a href="{{userSocialLinks.TwitterUrl}}"><fa-icon [icon]="fa-twitter-square"></fa-icon>
-          <i class="fab fa-twitter-square"></i></a>
+        <a target="_blank" href="{{userSocialLinks.TwitterUrl}}"> <i class="fab fa-2x fa-twitter-square"></i></a>
       </div>
     </div>
   </div>
 </div>
-<fa-icon [icon]="faCoffee"></fa-icon>

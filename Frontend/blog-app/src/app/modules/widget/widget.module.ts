@@ -5,7 +5,6 @@ import { CategoryListComponent } from './components/widgets/category-list/catego
 import { RouterModule } from '@angular/router';
 import { RecentPostsComponent } from './components/widgets/recent-posts/recent-posts.component';
 import { FollowUsComponent } from './components/widgets/follow-us/follow-us.component';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -16,8 +15,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   ],
   imports: [
     CommonModule,
-    RouterModule,
-    FontAwesomeModule
+    RouterModule
   ],
   exports: [
     RightWidgetComponent
