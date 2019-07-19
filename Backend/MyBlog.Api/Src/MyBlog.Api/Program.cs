@@ -7,9 +7,9 @@ namespace MyBlog.API
 #pragma warning disable CS1591
     public class Program
     {
-        public static async Task Main(string[] args)
+        public static void Main(string[] args)
         {
-            await CreateWebHostBuilder(args).Build().RunAsync();
+            CreateWebHostBuilder(args).Build().Run();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
