@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 using MyBlog.Domain.Entities;
 
@@ -14,5 +15,6 @@ namespace MyBlog.Application.Interfaces
         DbSet<UserDetail> UserDetails { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
+        DatabaseFacade Database { get;  }
     }
 }

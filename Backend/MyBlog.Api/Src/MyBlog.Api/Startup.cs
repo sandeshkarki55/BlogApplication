@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 using MyBlog.API.Extensions;
+using MyBlog.API.HostedService;
 using MyBlog.Application.Interfaces;
 using MyBlog.Persistence;
 
@@ -35,7 +36,7 @@ namespace MyBlog.API
                 .AddJsonOptions(options =>
                     options.SerializerSettings.ContractResolver = new DefaultContractResolver());
 
-            services.AddDbContext<IMyBlogDbContext, MyBlogDbContext>(options =>
+            services.AddDbContextPool<IMyBlogDbContext, MyBlogDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("MyBlogDatabase")));
 
             services.AddSwaggerGen(c =>
@@ -57,6 +58,8 @@ namespace MyBlog.API
                     builder.AllowAnyHeader();
                 });
             });
+
+            services.AddHostedService<StartupTask>();
 
             services.RegisterCategoryDependencies();
             services.RegisterBlogDependencies();
