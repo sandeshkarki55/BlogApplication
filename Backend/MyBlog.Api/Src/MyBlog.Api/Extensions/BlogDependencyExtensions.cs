@@ -15,8 +15,8 @@ namespace MyBlog.API.Extensions
         public static IServiceCollection RegisterBlogDependencies(this IServiceCollection services)
         {
             services.AddScoped<IRequestHandler<GetBlogsQuery, List<BlogListViewModel>>, GetBlogsQueryHandler>();
-            services.AddScoped<IRequestHandler<GetBlogQuery,BlogDetailViewModel>, GetBlogQueryHandler>();
-            services.AddScoped<IRequestHandler<GetRecentBlogsQuery,List<RecentBlogViewModel>>, GetRecentBlogsQueryHandler>();
+            services.AddScoped<IRequestHandler<GetBlogQuery, BlogDetailViewModel>, GetBlogQueryHandler>();
+            services.AddScoped<IRequestHandler<GetRecentBlogsQuery, List<RecentBlogViewModel>>, GetRecentBlogsQueryHandler>();
 
             services.AddScoped<ICommandHandler<AddBlogCommand>, AddBlogCommandHandler>();
 
