@@ -5,18 +5,22 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CKEditorModule } from 'ckeditor4-angular';
 import { CreateUserComponent } from './components/user/create-user/create-user.component';
 import { UserListComponent } from './components/user/user-list/user-list.component';
+import { AdminLayoutComponent } from './components/admin-layout/admin-layout.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
     CreateBlogFormComponent,
     CreateUserComponent,
-    UserListComponent
+    UserListComponent,
+    AdminLayoutComponent
   ],
   exports: [
     CreateBlogFormComponent
   ],
   imports: [
     CommonModule,
+    RouterModule,
     ReactiveFormsModule,
     CKEditorModule
   ]

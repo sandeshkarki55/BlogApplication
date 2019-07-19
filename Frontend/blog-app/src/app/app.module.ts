@@ -3,13 +3,9 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 
-import { SharedModule } from './modules/shared/shared.module';
-import { BlogModule } from './modules/blog/blog.module';
-import { HomeModule } from './modules/home/home.module';
-import { WidgetModule } from './modules/widget/widget.module';
-
 import { routing } from './app.routing';
 import { AdminModule } from './modules/admin/admin.module';
+import { ClientModule } from './modules/client/client.module';
 
 @NgModule({
   declarations: [
@@ -18,11 +14,8 @@ import { AdminModule } from './modules/admin/admin.module';
   imports: [
     routing,
     BrowserModule,
-    SharedModule,
-    BlogModule,
-    HomeModule,
-    WidgetModule,
-    AdminModule
+    AdminModule,
+    ClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
