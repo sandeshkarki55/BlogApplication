@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using MediatR;
 
-using MyBlog.Application.Interfaces;
+using System.Collections.Generic;
 
 namespace MyBlog.Application.Categories.Queries.GetCategories
 {

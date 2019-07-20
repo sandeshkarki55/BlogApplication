@@ -1,11 +1,14 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using MediatR;
 
 using Microsoft.EntityFrameworkCore;
 
 using MyBlog.Application.Exceptions;
 using MyBlog.Application.Interfaces;
 using MyBlog.Domain.Entities;
+
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace MyBlog.Application.Categories.Queries.GetCategory
 {
@@ -17,7 +20,8 @@ namespace MyBlog.Application.Categories.Queries.GetCategory
         {
             _context = context;
         }
-        public async Task<CategoryDetailViewModel> HandleAsync(GetCategoryQuery request)
+
+        public async Task<CategoryDetailViewModel> Handle(GetCategoryQuery request, CancellationToken cancellationToken)
         {
             var category = await _context.Categories.Select(x => new CategoryDetailViewModel
             {

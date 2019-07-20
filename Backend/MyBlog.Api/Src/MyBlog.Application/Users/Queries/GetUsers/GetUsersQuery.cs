@@ -1,4 +1,5 @@
-﻿using MyBlog.Application.Interfaces;
+﻿using MediatR;
+
 using System.Collections.Generic;
 
 namespace MyBlog.Application.Users.Queries.GetUsers

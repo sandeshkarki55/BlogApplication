@@ -1,8 +1,8 @@
-﻿using MyBlog.Application.Interfaces;
+﻿using MediatR;
 
 namespace MyBlog.Application.Categories.Commands.DeleteCategory
 {
-    public class DeleteCategoryCommand:ICommand
+    public class DeleteCategoryCommand : IRequest
     {
         public int Id { get; set; }
     }

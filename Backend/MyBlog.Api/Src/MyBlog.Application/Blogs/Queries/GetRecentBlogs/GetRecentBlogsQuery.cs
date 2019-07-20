@@ -1,4 +1,4 @@
-﻿using MyBlog.Application.Interfaces;
+﻿using MediatR;
 
 using System.Collections.Generic;
 

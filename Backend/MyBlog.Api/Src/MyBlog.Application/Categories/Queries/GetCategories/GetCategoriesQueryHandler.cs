@@ -1,9 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MediatR;
+
+using Microsoft.EntityFrameworkCore;
 
 using MyBlog.Application.Interfaces;
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MyBlog.Application.Categories.Queries.GetCategories
@@ -17,7 +20,7 @@ namespace MyBlog.Application.Categories.Queries.GetCategories
             _context = context;
         }
 
-        public async Task<List<CategoryListViewModel>> HandleAsync(GetCategoriesQuery request)
+        public async Task<List<CategoryListViewModel>> Handle(GetCategoriesQuery request, CancellationToken cancellationToken)
         {
             var categories = await _context.Categories.Select(x => new CategoryListViewModel
             {

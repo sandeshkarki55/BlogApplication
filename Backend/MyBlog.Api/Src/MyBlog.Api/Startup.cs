@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using MediatR;
+
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-using MyBlog.API.Extensions;
 using MyBlog.API.HostedService;
 using MyBlog.Application.Interfaces;
 using MyBlog.Persistence;
@@ -61,9 +62,12 @@ namespace MyBlog.API
 
             services.AddHostedService<StartupTask>();
 
-            services.RegisterCategoryDependencies();
-            services.RegisterBlogDependencies();
-            services.RegisterUserDependencies();
+            var applicationAssembly = Assembly.GetAssembly(typeof(IMyBlogDbContext));
+            services.AddMediatR(applicationAssembly);
+
+            //services.RegisterCategoryDependencies();
+            //services.RegisterBlogDependencies();
+            //services.RegisterUserDependencies();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

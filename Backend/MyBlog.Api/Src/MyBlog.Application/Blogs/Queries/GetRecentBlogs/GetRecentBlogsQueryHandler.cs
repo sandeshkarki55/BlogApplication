@@ -1,9 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MediatR;
+
+using Microsoft.EntityFrameworkCore;
 
 using MyBlog.Application.Interfaces;
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MyBlog.Application.Blogs.Queries.GetRecentBlogs
@@ -17,7 +20,7 @@ namespace MyBlog.Application.Blogs.Queries.GetRecentBlogs
             _myBlogDbContext = myBlogDbContext;
         }
 
-        public async Task<List<RecentBlogViewModel>> HandleAsync(GetRecentBlogsQuery request)
+        public async Task<List<RecentBlogViewModel>> Handle(GetRecentBlogsQuery request, CancellationToken cancellationToken)
         {
             var recentBlogs = await _myBlogDbContext.Blogs.Where(x => !x.IsDraft).OrderByDescending(x => x.PostedDate).Select(x => new RecentBlogViewModel
             {

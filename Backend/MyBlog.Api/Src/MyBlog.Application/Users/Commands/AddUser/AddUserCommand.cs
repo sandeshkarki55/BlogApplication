@@ -1,8 +1,8 @@
-﻿using MyBlog.Application.Interfaces;
+﻿using MediatR;
 
 namespace MyBlog.Application.Users.Commands.AddUser
 {
-    public class AddUserCommand : ICommand<int>
+    public class AddUserCommand : IRequest<int>
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

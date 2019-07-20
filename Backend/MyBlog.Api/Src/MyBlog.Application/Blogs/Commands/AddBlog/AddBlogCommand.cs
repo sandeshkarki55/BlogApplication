@@ -1,8 +1,8 @@
-﻿using MyBlog.Application.Interfaces;
+﻿using MediatR;
 
 namespace MyBlog.Application.Blogs.Commands.AddBlog
 {
-    public class AddBlogCommand : ICommand
+    public class AddBlogCommand : IRequest<int>
     {
         public string Title { get; set; }
         public string Description { get; set; }

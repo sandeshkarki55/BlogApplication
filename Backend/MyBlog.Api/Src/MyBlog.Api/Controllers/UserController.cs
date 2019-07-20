@@ -1,14 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+
+using Microsoft.AspNetCore.Mvc;
 
 using MyBlog.API.Models.Common;
-using MyBlog.Application.Interfaces;
 using MyBlog.Application.Users.Commands.AddUser;
 using MyBlog.Application.Users.Commands.DeleteUser;
 using MyBlog.Application.Users.Queries.GetUser;
 using MyBlog.Application.Users.Queries.GetUsers;
 using MyBlog.Application.Users.Queries.GetUserSocialLinks;
 
-using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -19,24 +19,11 @@ namespace MyBlog.API.Controllers
     [Produces("application/json")]
     public class UserController : BaseController
     {
-        private readonly IRequestHandler<GetUserQuery, UserDetailViewModel> _getUserRequestHandler;
-        private readonly IRequestHandler<GetUsersQuery, List<UserListViewModel>> _getUsersRequestHandler;
-        private readonly ICommandHandler<DeleteUserCommand> _deleteUserCommandHandler;
-        private readonly ICommandHandler<AddUserCommand, int> _addUserCommandHandler;
-        private readonly IRequestHandler<GetUserSocialLinksQuery, UserSocialLinksViewModel> _getUserSocialLinksRequestHandler;
+        private readonly IMediator _mediator;
 
-        public UserController(
-            IRequestHandler<GetUserQuery, UserDetailViewModel> getUserRequestHandler,
-            IRequestHandler<GetUsersQuery, List<UserListViewModel>> getUsersRequestHandler,
-            ICommandHandler<DeleteUserCommand> deleteUserCommandHandler,
-            ICommandHandler<AddUserCommand, int> addUserCommandHandler,
-            IRequestHandler<GetUserSocialLinksQuery, UserSocialLinksViewModel> getUserSocialLinksRequestHandler)
+        public UserController(IMediator mediator)
         {
-            _getUserRequestHandler = getUserRequestHandler;
-            _getUsersRequestHandler = getUsersRequestHandler;
-            _deleteUserCommandHandler = deleteUserCommandHandler;
-            _addUserCommandHandler = addUserCommandHandler;
-            _getUserSocialLinksRequestHandler = getUserSocialLinksRequestHandler;
+            _mediator = mediator;
         }
 
         /// <summary>
@@ -51,7 +38,7 @@ namespace MyBlog.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get([FromRoute]int id)
         {
-            var user = await _getUserRequestHandler.HandleAsync(new GetUserQuery { Id = id });
+            var user = await _mediator.Send(new GetUserQuery { Id = id });
             return Ok(new ResponseModel
             {
                 Data = user,
@@ -69,7 +56,7 @@ namespace MyBlog.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var users = await _getUsersRequestHandler.HandleAsync(new GetUsersQuery());
+            var users = await _mediator.Send(new GetUsersQuery());
             return Ok(new ResponseModel
             {
                 Data = users,
@@ -91,7 +78,7 @@ namespace MyBlog.API.Controllers
         public async Task<IActionResult> Delete([FromRoute]int id)
         {
             var currentUser = 1;
-            await _deleteUserCommandHandler.HandleAsync(new DeleteUserCommand { Id = id, DeletedBy = currentUser }, CancellationToken);
+            await _mediator.Send(new DeleteUserCommand { Id = id, DeletedBy = currentUser }, CancellationToken);
             return NoContent();
         }
 
@@ -105,7 +92,7 @@ namespace MyBlog.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]AddUserCommand command)
         {
-            var id = await _addUserCommandHandler.HandleAsync(command, CancellationToken);
+            var id = await _mediator.Send(command, CancellationToken);
             return CreatedAtAction(nameof(Get), new { id }, command);
         }
 
@@ -121,7 +108,7 @@ namespace MyBlog.API.Controllers
         [HttpGet("{userName}/SocialLinks")]
         public async Task<IActionResult> GetUserSocialLinks([FromRoute]string userName)
         {
-            var userSocialLinks = await _getUserSocialLinksRequestHandler.HandleAsync(new GetUserSocialLinksQuery { UserName = userName });
+            var userSocialLinks = await _mediator.Send(new GetUserSocialLinksQuery { UserName = userName });
 
             return Ok(new ResponseModel
             {

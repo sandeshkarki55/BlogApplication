@@ -1,12 +1,14 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
+﻿using MediatR;
 
 using MyBlog.Application.Interfaces;
 using MyBlog.Domain.Entities;
 
+using System.Threading;
+using System.Threading.Tasks;
+
 namespace MyBlog.Application.Categories.Commands.AddCategory
 {
-    public class AddCategoryCommandHandler : ICommandHandler<AddCategoryCommand, int>
+    public class AddCategoryCommandHandler : IRequestHandler<AddCategoryCommand, int>
     {
         private readonly IMyBlogDbContext _context;
 
@@ -15,11 +17,11 @@ namespace MyBlog.Application.Categories.Commands.AddCategory
             _context = context;
         }
 
-        public async Task<int> HandleAsync(AddCategoryCommand command, CancellationToken cancellationToken)
+        public async Task<int> Handle(AddCategoryCommand request, CancellationToken cancellationToken)
         {
             var category = new Category
             {
-                Name = command.Name
+                Name = request.Name
             };
 
             await _context.Categories.AddAsync(category);

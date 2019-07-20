@@ -1,13 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+
+using Microsoft.AspNetCore.Mvc;
 
 using MyBlog.API.Models.Common;
 using MyBlog.Application.Blogs.Commands.AddBlog;
 using MyBlog.Application.Blogs.Queries.GetBlog;
 using MyBlog.Application.Blogs.Queries.GetBlogs;
 using MyBlog.Application.Blogs.Queries.GetRecentBlogs;
-using MyBlog.Application.Interfaces;
 
-using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -18,20 +18,11 @@ namespace MyBlog.API.Controllers
     [Produces("application/json")]
     public class BlogController : BaseController
     {
-        private readonly ICommandHandler<AddBlogCommand> _addBlogCommandHandler;
-        private readonly IRequestHandler<GetBlogsQuery, List<BlogListViewModel>> _getBlogsRequestHandler;
-        private readonly IRequestHandler<GetBlogQuery, BlogDetailViewModel> _getBlogQueryHandler;
-        private readonly IRequestHandler<GetRecentBlogsQuery, List<RecentBlogViewModel>> _getRecentBlogQueryHandler;
+        private readonly IMediator _mediator;
 
-        public BlogController(ICommandHandler<AddBlogCommand> addBlogCommandHandler,
-            IRequestHandler<GetBlogsQuery, List<BlogListViewModel>> getBlogsRequestHandler,
-            IRequestHandler<GetBlogQuery, BlogDetailViewModel> getBlogQueryHandler,
-            IRequestHandler<GetRecentBlogsQuery, List<RecentBlogViewModel>> getRecentBlogQueryHandler)
+        public BlogController(IMediator mediator)
         {
-            _addBlogCommandHandler = addBlogCommandHandler;
-            _getBlogsRequestHandler = getBlogsRequestHandler;
-            _getBlogQueryHandler = getBlogQueryHandler;
-            _getRecentBlogQueryHandler = getRecentBlogQueryHandler;
+            _mediator = mediator;
         }
 
         /// <summary>
@@ -46,7 +37,7 @@ namespace MyBlog.API.Controllers
         {
             command.UserName = "sandeshkarki";
 
-            await _addBlogCommandHandler.HandleAsync(command, CancellationToken);
+            await _mediator.Send(command, CancellationToken);
             return NoContent();
         }
 
@@ -59,7 +50,7 @@ namespace MyBlog.API.Controllers
         [ProducesResponseType(200)]
         public async Task<IActionResult> GetAll()
         {
-            var blogs = await _getBlogsRequestHandler.HandleAsync(new GetBlogsQuery());
+            var blogs = await _mediator.Send(new GetBlogsQuery());
             return Ok(new ResponseModel
             {
                 Message = "Blogs fetched successfully.",
@@ -78,7 +69,7 @@ namespace MyBlog.API.Controllers
         [Route("Recent")]
         public async Task<IActionResult> GetRecent()
         {
-            var recentBlogs = await _getRecentBlogQueryHandler.HandleAsync(new GetRecentBlogsQuery());
+            var recentBlogs = await _mediator.Send(new GetRecentBlogsQuery());
 
             return Ok(new ResponseModel
             {
@@ -100,7 +91,7 @@ namespace MyBlog.API.Controllers
         [ProducesResponseType(404)]
         public async Task<IActionResult> GetBlog(int id)
         {
-            var blog = await _getBlogQueryHandler.HandleAsync(new GetBlogQuery { Id = id });
+            var blog = await _mediator.Send(new GetBlogQuery { Id = id });
             return Ok(new ResponseModel
             {
                 Message = $"Blog with id {id} fetched successfully.",

@@ -1,10 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MediatR;
+
+using Microsoft.EntityFrameworkCore;
 
 using MyBlog.Application.Interfaces;
 
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MyBlog.Application.Blogs.Queries.GetBlogs
@@ -18,7 +21,7 @@ namespace MyBlog.Application.Blogs.Queries.GetBlogs
             _myBlogDbContext = myBlogDbContext;
         }
 
-        public async Task<List<BlogListViewModel>> HandleAsync(GetBlogsQuery request)
+        public async Task<List<BlogListViewModel>> Handle(GetBlogsQuery request, CancellationToken cancellationToken)
         {
             var blogs = await _myBlogDbContext.Blogs.Where(x => !x.IsDraft).OrderByDescending(x => x.PostedDate).Include(x => x.Category).Select(x => new BlogListViewModel
             {

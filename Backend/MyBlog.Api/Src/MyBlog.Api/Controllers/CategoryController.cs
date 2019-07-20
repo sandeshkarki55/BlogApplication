@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MediatR;
+
+using Microsoft.AspNetCore.Mvc;
 
 using MyBlog.API.Models.Common;
 using MyBlog.Application.Categories.Commands.AddCategory;
 using MyBlog.Application.Categories.Commands.DeleteCategory;
 using MyBlog.Application.Categories.Queries.GetCategories;
 using MyBlog.Application.Categories.Queries.GetCategory;
-using MyBlog.Application.Interfaces;
 
 using System.Collections.Generic;
 using System.Net;
@@ -18,20 +19,11 @@ namespace MyBlog.API.Controllers
     [Produces("application/json")]
     public class CategoryController : BaseController
     {
-        private readonly ICommandHandler<AddCategoryCommand, int> _addCategoryCommandHandler;
-        private readonly ICommandHandler<DeleteCategoryCommand> _deleteCategoryCommandHandler;
-        private readonly IRequestHandler<GetCategoryQuery, CategoryDetailViewModel> _getCategoryRequestHandler;
-        private readonly IRequestHandler<GetCategoriesQuery, List<CategoryListViewModel>> _getCategoriesRequestHandler;
+        private readonly IMediator _mediator;
 
-        public CategoryController(ICommandHandler<AddCategoryCommand, int> addCategoryCommandHandler,
-            ICommandHandler<DeleteCategoryCommand> deleteCategoryCommandHandler,
-            IRequestHandler<GetCategoryQuery, CategoryDetailViewModel> getCategoryRequestHandler,
-            IRequestHandler<GetCategoriesQuery, List<CategoryListViewModel>> getCategoriesRequestHandler)
+        public CategoryController(IMediator mediator)
         {
-            _addCategoryCommandHandler = addCategoryCommandHandler;
-            _deleteCategoryCommandHandler = deleteCategoryCommandHandler;
-            _getCategoryRequestHandler = getCategoryRequestHandler;
-            _getCategoriesRequestHandler = getCategoriesRequestHandler;
+            _mediator = mediator;
         }
 
         /// <summary>
@@ -44,7 +36,7 @@ namespace MyBlog.API.Controllers
         [ProducesResponseType(201)]
         public async Task<IActionResult> CreateCategory([FromBody]AddCategoryCommand command)
         {
-            int id = await _addCategoryCommandHandler.HandleAsync(command, CancellationToken);
+            int id = await _mediator.Send(command, CancellationToken);
             return CreatedAtAction(nameof(Get), new { id }, command);
         }
 
@@ -57,7 +49,7 @@ namespace MyBlog.API.Controllers
         [ProducesResponseType(200)]
         public async Task<IActionResult> GetAll()
         {
-            List<CategoryListViewModel> categories = await _getCategoriesRequestHandler.HandleAsync(new GetCategoriesQuery());
+            List<CategoryListViewModel> categories = await _mediator.Send(new GetCategoriesQuery());
             return Ok(new ResponseModel
             {
                 Message = "All categories fetched successfully.",
@@ -78,7 +70,7 @@ namespace MyBlog.API.Controllers
         [ProducesResponseType(404)]
         public async Task<IActionResult> Get([FromRoute]int id)
         {
-            CategoryDetailViewModel category = await _getCategoryRequestHandler.HandleAsync(new GetCategoryQuery { Id = id });
+            CategoryDetailViewModel category = await _mediator.Send(new GetCategoryQuery { Id = id });
 
             return Ok(new ResponseModel
             {
@@ -98,7 +90,7 @@ namespace MyBlog.API.Controllers
         [ProducesResponseType(204)]
         public async Task<IActionResult> Delete([FromRoute]int id)
         {
-            await _deleteCategoryCommandHandler.HandleAsync(new DeleteCategoryCommand { Id = id }, CancellationToken);
+            await _mediator.Send(new DeleteCategoryCommand { Id = id }, CancellationToken);
             return NoContent();
         }
     }

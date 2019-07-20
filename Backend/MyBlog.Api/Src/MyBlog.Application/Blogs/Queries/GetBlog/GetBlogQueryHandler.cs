@@ -1,10 +1,13 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MediatR;
+
+using Microsoft.EntityFrameworkCore;
 
 using MyBlog.Application.Exceptions;
 using MyBlog.Application.Interfaces;
 using MyBlog.Domain.Entities;
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MyBlog.Application.Blogs.Queries.GetBlog
@@ -18,9 +21,9 @@ namespace MyBlog.Application.Blogs.Queries.GetBlog
             _context = context;
         }
 
-        public async Task<BlogDetailViewModel> HandleAsync(GetBlogQuery request)
+        public async Task<BlogDetailViewModel> Handle(GetBlogQuery request, CancellationToken cancellationToken)
         {
-            var blog = await _context.Blogs.Include(x=>x.Category).FirstOrDefaultAsync(x => x.Id == request.Id);
+            var blog = await _context.Blogs.Include(x => x.Category).FirstOrDefaultAsync(x => x.Id == request.Id);
 
             if (blog == null)
             {
@@ -30,12 +33,12 @@ namespace MyBlog.Application.Blogs.Queries.GetBlog
             var viewModel = new BlogDetailViewModel
             {
                 Id = blog.Id,
-                Description= blog.Description,
-                CategoryName= blog.Category.Name,
+                Description = blog.Description,
+                CategoryName = blog.Category.Name,
                 PostedDate = Convert.ToDateTime(blog.PostedDate),
-                Tags= blog.Tags,
-                Title= blog.Title,
-                UserName= blog.UserName
+                Tags = blog.Tags,
+                Title = blog.Title,
+                UserName = blog.UserName
             };
 
             return viewModel;

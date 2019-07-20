@@ -1,4 +1,4 @@
-﻿using MyBlog.Application.Interfaces;
+﻿using MediatR;
 
 namespace MyBlog.Application.Users.Queries.GetUserSocialLinks
 {

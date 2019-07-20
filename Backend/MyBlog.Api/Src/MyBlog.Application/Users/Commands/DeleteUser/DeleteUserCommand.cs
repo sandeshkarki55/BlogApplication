@@ -1,8 +1,9 @@
-﻿using MyBlog.Application.Interfaces;
+﻿using MediatR;
+using MyBlog.Application.Interfaces;
 
 namespace MyBlog.Application.Users.Commands.DeleteUser
 {
-    public class DeleteUserCommand : ICommand
+    public class DeleteUserCommand : IRequest
     {
         public int Id { get; set; }
         public int DeletedBy { get; set; }

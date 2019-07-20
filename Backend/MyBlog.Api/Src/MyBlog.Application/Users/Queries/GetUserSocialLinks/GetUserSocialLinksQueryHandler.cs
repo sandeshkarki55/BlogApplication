@@ -1,9 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MediatR;
+
+using Microsoft.EntityFrameworkCore;
 
 using MyBlog.Application.Exceptions;
 using MyBlog.Application.Interfaces;
 using MyBlog.Domain.Entities;
 
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MyBlog.Application.Users.Queries.GetUserSocialLinks
@@ -17,8 +20,7 @@ namespace MyBlog.Application.Users.Queries.GetUserSocialLinks
             _myBlogDbContext = myBlogDbContext;
         }
 
-
-        public async Task<UserSocialLinksViewModel> HandleAsync(GetUserSocialLinksQuery request)
+        public async Task<UserSocialLinksViewModel> Handle(GetUserSocialLinksQuery request, CancellationToken cancellationToken)
         {
             var userDetails = await _myBlogDbContext.UserDetails.FirstOrDefaultAsync(x => x.UserName == request.UserName && !x.IsDeleted);
 

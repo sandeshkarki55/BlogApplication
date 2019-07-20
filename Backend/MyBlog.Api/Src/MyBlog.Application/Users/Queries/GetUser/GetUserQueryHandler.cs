@@ -1,9 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MediatR;
+
+using Microsoft.EntityFrameworkCore;
 
 using MyBlog.Application.Exceptions;
 using MyBlog.Application.Interfaces;
 using MyBlog.Domain.Entities;
 
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace MyBlog.Application.Users.Queries.GetUser
@@ -17,7 +20,7 @@ namespace MyBlog.Application.Users.Queries.GetUser
             _myBlogDbContext = myBlogDbContext;
         }
 
-        public async Task<UserDetailViewModel> HandleAsync(GetUserQuery request)
+        public async Task<UserDetailViewModel> Handle(GetUserQuery request, CancellationToken cancellationToken)
         {
             var user = await _myBlogDbContext.UserDetails.FirstOrDefaultAsync(x => !x.IsDeleted && x.Id == request.Id);
 
