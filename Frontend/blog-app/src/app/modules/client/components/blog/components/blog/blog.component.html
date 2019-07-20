@@ -1,0 +1,9 @@
+<div class="container">
+  <div class="row">
+    <div class="container">
+      <div *ngFor="let blog of Blogs" class="my-2 row">
+        <app-blog-list [blog]="blog" class="col-md-12"></app-blog-list>
+      </div>
+    </div>
+  </div>
+</div>
