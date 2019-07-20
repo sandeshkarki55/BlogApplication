@@ -1,12 +1,12 @@
-﻿using System.Threading;
-
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 using MyBlog.API.Filters;
 
+using System.Threading;
+
 namespace MyBlog.API.Controllers
 {
-    [CustomExceptionFilter]
+    [ServiceFilter(typeof(CustomExceptionFilterAttribute))]
     public class BaseController : ControllerBase
     {
         protected CancellationToken CancellationToken { get; private set; }

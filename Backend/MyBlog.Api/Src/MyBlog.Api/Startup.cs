@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
+using Microsoft.Extensions.Logging;
+using MyBlog.API.Filters;
 using MyBlog.API.HostedService;
 using MyBlog.Application.Interfaces;
 using MyBlog.Persistence;
@@ -47,7 +48,6 @@ namespace MyBlog.API
                 var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
                 c.IncludeXmlComments(xmlPath);
-
             });
 
             services.AddCors(options =>
@@ -65,13 +65,13 @@ namespace MyBlog.API
             var applicationAssembly = Assembly.GetAssembly(typeof(IMyBlogDbContext));
             services.AddMediatR(applicationAssembly);
 
-            //services.RegisterCategoryDependencies();
-            //services.RegisterBlogDependencies();
-            //services.RegisterUserDependencies();
+            services.AddApplicationInsightsTelemetry();
+
+            services.AddScoped<CustomExceptionFilterAttribute>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             app.UseSwagger();
             app.UseSwaggerUI(c =>

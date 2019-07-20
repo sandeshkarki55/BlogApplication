@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.Logging;
 
 using MyBlog.API.Models.Common;
 using MyBlog.Application.Exceptions;
@@ -12,6 +13,13 @@ namespace MyBlog.API.Filters
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
     public class CustomExceptionFilterAttribute : ExceptionFilterAttribute
     {
+        private readonly ILogger<CustomExceptionFilterAttribute> _logger;
+
+        public CustomExceptionFilterAttribute(ILogger<CustomExceptionFilterAttribute> logger)
+        {
+            _logger = logger;
+        }
+
         public override void OnException(ExceptionContext context)
         {
             var statusCode = HttpStatusCode.InternalServerError;
@@ -26,8 +34,10 @@ namespace MyBlog.API.Filters
             context.Result = new JsonResult(new ResponseModel
             {
                 Message = context.Exception.Message,
-                BlogStatusCode= (int)statusCode
+                BlogStatusCode = (int)statusCode
             });
+
+            _logger.LogError(context.Exception, "Exception in request.");
         }
     }
 }
