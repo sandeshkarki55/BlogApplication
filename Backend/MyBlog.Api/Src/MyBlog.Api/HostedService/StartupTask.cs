@@ -24,7 +24,6 @@ namespace MyBlog.API.HostedService
             using (var scope = _serviceProvider.CreateScope())
             {
                 var context = scope.ServiceProvider.GetRequiredService<IMyBlogDbContext>();
-                await context.Database.EnsureCreatedAsync();
                 await context.Database.MigrateAsync();
             }
         }
