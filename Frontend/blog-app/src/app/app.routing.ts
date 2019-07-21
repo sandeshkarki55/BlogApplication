@@ -10,30 +10,6 @@ import { PageNotFoundComponent } from './modules/client/components/shared/compon
 
 const routes: Routes = [
     {
-        path: 'blog',
-        component: ClientLayoutComponent,
-        children: [
-            {
-                path: '',
-                component: BlogComponent
-            },
-            {
-                path: ':id',
-                component: BlogDetailComponent
-            }
-        ]
-    },
-    {
-        path: 'home',
-        component: ClientLayoutComponent,
-        children: [
-            {
-                path: '',
-                component: HomeComponent
-            }
-        ]
-    },
-    {
         path: "admin",
         component: AdminLayoutComponent,
         children: [
@@ -44,12 +20,26 @@ const routes: Routes = [
         ]
     },
     {
-        path: 'home',
-        component: HomeComponent
+        path: '',
+        component: ClientLayoutComponent,
+        children: [
+            {
+                path: 'blog',
+                component: BlogComponent
+            },
+            {
+                path: 'blog:id',
+                component: BlogDetailComponent
+            },
+            {
+                path: 'home',
+                component: HomeComponent
+            }
+        ]
     },
     {
         path: '',
-        redirectTo: '/home',
+        redirectTo: '/blog',
         pathMatch: 'full'
     },
     { path: '**', component: PageNotFoundComponent }
