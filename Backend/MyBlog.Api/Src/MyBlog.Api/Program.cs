@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.ApplicationInsights;
 using System.Threading.Tasks;
 
 namespace MyBlog.API
@@ -15,7 +17,12 @@ namespace MyBlog.API
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
             .UseApplicationInsights()
-                .UseStartup<Startup>();
+                .UseStartup<Startup>()
+            .ConfigureLogging(builder =>
+            {
+                builder.AddApplicationInsights();
+                builder.AddFilter<ApplicationInsightsLoggerProvider>("", LogLevel.Information);
+            });
     }
 #pragma warning restore CS1591
 }
