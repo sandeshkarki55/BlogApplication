@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using MediatR.Pipeline;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -7,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+
 using MyBlog.API.Filters;
 using MyBlog.API.HostedService;
 using MyBlog.Application.Interfaces;
+using MyBlog.Application.RequestBehaviors;
 using MyBlog.Persistence;
 
 using Newtonsoft.Json.Serialization;
@@ -34,6 +37,7 @@ namespace MyBlog.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient(typeof(IRequestPreProcessor<>), typeof(RequestLogBehavior<>));
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddJsonOptions(options =>
                     options.SerializerSettings.ContractResolver = new DefaultContractResolver());
@@ -64,8 +68,6 @@ namespace MyBlog.API
 
             var applicationAssembly = Assembly.GetAssembly(typeof(IMyBlogDbContext));
             services.AddMediatR(applicationAssembly);
-
-            services.AddApplicationInsightsTelemetry();
 
             services.AddScoped<CustomExceptionFilterAttribute>();
         }
