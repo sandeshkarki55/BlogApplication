@@ -28,21 +28,24 @@ const routes: Routes = [
                 component: BlogComponent
             },
             {
-                path: 'blog:id',
+                path: 'blog/:id',
                 component: BlogDetailComponent
             },
             {
                 path: 'home',
                 component: HomeComponent
+            },
+            {
+                path: '',
+                redirectTo: '/blog',
+                pathMatch: 'full'
             }
         ]
     },
     {
-        path: '',
-        redirectTo: '/blog',
-        pathMatch: 'full'
-    },
-    { path: '**', component: PageNotFoundComponent }
+        path: '**',
+        component: PageNotFoundComponent
+    }
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes)
