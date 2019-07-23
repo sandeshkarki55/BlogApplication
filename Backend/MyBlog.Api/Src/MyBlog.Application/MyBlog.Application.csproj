@@ -6,12 +6,17 @@
 
   <ItemGroup>
     <PackageReference Include="mediatr" Version="7.0.0" />
+    <PackageReference Include="microsoft.aspnetcore.identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.4" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\MyBlog.Common\MyBlog.Common.csproj" />
     <ProjectReference Include="..\MyBlog.Domain\MyBlog.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
   </ItemGroup>
 
 </Project>

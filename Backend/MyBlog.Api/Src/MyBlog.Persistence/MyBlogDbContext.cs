@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 using MyBlog.Application.Interfaces;
@@ -6,7 +7,7 @@ using MyBlog.Domain.Entities;
 
 namespace MyBlog.Persistence
 {
-    public class MyBlogDbContext : DbContext, IMyBlogDbContext
+    public class MyBlogDbContext : IdentityDbContext<AppUser>, IMyBlogDbContext
     {
         public MyBlogDbContext(DbContextOptions<MyBlogDbContext> options) : base(options)
         { }
@@ -17,6 +18,8 @@ namespace MyBlog.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             var assembly = typeof(MyBlogDbContext).Assembly;
             modelBuilder.ApplyConfigurationsFromAssembly(assembly);
         }

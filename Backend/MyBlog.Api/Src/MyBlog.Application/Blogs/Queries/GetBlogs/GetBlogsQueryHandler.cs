@@ -31,7 +31,7 @@ namespace MyBlog.Application.Blogs.Queries.GetBlogs
                 PostedDate = Convert.ToDateTime(x.PostedDate),
                 ShortDescription = x.ShortDescription,
                 Tags = x.Tags,
-                UserName = x.UserName
+                //UserName = x.UserName
             }).ToListAsync();
 
             return blogs;

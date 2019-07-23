@@ -1,8 +1,8 @@
 ﻿using MediatR;
-using MediatR.Pipeline;
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -13,6 +13,7 @@ using MyBlog.API.Filters;
 using MyBlog.API.HostedService;
 using MyBlog.Application.Interfaces;
 using MyBlog.Application.RequestBehaviors;
+using MyBlog.Domain.Entities;
 using MyBlog.Persistence;
 
 using Newtonsoft.Json.Serialization;
@@ -41,8 +42,13 @@ namespace MyBlog.API
                 .AddJsonOptions(options =>
                     options.SerializerSettings.ContractResolver = new DefaultContractResolver());
 
-            services.AddDbContextPool<IMyBlogDbContext, MyBlogDbContext>(options =>
+            services.AddDbContextPool<MyBlogDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("MyBlogDatabase")));
+            services.AddScoped<IMyBlogDbContext>(s => s.GetRequiredService<MyBlogDbContext>());
+
+            services.AddIdentity<AppUser, IdentityRole>()
+            .AddEntityFrameworkStores<MyBlogDbContext>()
+            .AddDefaultTokenProviders();
 
             services.AddSwaggerGen(c =>
             {
@@ -65,7 +71,7 @@ namespace MyBlog.API
 
             services.AddHostedService<StartupTask>();
 
-            var applicationAssembly = Assembly.GetAssembly(typeof(IMyBlogDbContext));
+            var applicationAssembly = Assembly.GetAssembly(typeof(RequestLogBehavior<>));
             services.AddMediatR(applicationAssembly);
 
             services.AddScoped<CustomExceptionFilterAttribute>();
@@ -87,6 +93,7 @@ namespace MyBlog.API
             }
 
             app.UseCors("MyPolicy");
+            app.UseAuthentication();
             app.UseMvc();
         }
     }

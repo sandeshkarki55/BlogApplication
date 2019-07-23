@@ -7,7 +7,7 @@ using System.Threading;
 namespace MyBlog.API.Controllers
 {
     [ServiceFilter(typeof(CustomExceptionFilterAttribute))]
-    public class BaseController : ControllerBase
+    public abstract class BaseController : ControllerBase
     {
         protected CancellationToken CancellationToken { get; private set; }
         public BaseController()

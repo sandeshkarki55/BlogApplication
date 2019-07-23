@@ -33,11 +33,10 @@ namespace MyBlog.Application.Users.Queries.GetUser
             {
                 UserName = user.UserName,
                 Address = user.Address,
-                Email = user.Email,
                 FacebookUrl = user.FacebookUrl,
-                FirstName = user.FirstName,
+                //FirstName = user.FirstName,
                 GithubUrl = user.GithubUrl,
-                LastName = user.LastName,
+                //LastName = user.LastName,
                 LinkedinUrl = user.LinkedinUrl,
                 TwitterUrl = user.TwitterUrl
             };

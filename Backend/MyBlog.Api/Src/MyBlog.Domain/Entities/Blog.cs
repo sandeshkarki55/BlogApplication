@@ -12,10 +12,11 @@ namespace MyBlog.Domain.Entities
         public bool IsDraft { get; set; }
         public DateTime? PostedDate { get; set; }
         public string Tags { get; set; }
+
         public int CategoryId { get; set; }
         public Category Category { get; set; }
 
-        public string UserName { get; set; }
+        public int UserDetailId { get; set; }
         public UserDetail Author { get; set; }
     }
 }

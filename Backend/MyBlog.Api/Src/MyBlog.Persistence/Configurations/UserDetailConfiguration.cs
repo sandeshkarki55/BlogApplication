@@ -9,18 +9,22 @@ namespace MyBlog.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<UserDetail> builder)
         {
-            builder.HasMany(x => x.Blogs)
-                 .WithOne(x => x.Author)
-                 .HasForeignKey(x => x.UserName)
-                 .HasPrincipalKey(x => x.UserName);
-
-            builder.HasIndex(x => x.Email).IsUnique();
-            builder.Property(x => x.Email).HasMaxLength(75).IsRequired();
-
-            builder.Property(x => x.UserName).IsRequired().HasMaxLength(50);
-            builder.Property(x => x.FirstName).IsRequired().HasMaxLength(50);
-            builder.Property(x => x.LastName).HasMaxLength(50);
             builder.Property(x => x.Address).HasMaxLength(50);
+
+            builder.OwnsOne(x => x.Name, y =>
+            {
+                y.Property(x => x.FirstName).HasMaxLength(50)
+                .HasColumnName("FirstName");
+
+                y.Property(x => x.LastName).HasMaxLength(50)
+                .HasColumnName("LastName");
+
+                y.Ignore(x => x.FullName);
+            });
+
+            builder.HasMany(x => x.Blogs)
+                .WithOne(x => x.Author)
+                .HasForeignKey(x => x.UserDetailId);
         }
     }
 }

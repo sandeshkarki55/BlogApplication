@@ -38,7 +38,7 @@ namespace MyBlog.Application.Blogs.Queries.GetBlog
                 PostedDate = Convert.ToDateTime(blog.PostedDate),
                 Tags = blog.Tags,
                 Title = blog.Title,
-                UserName = blog.UserName
+                //UserName = blog.UserName
             };
 
             return viewModel;

@@ -22,14 +22,13 @@ namespace MyBlog.Application.Users.Queries.GetUsers
 
         public async Task<List<UserListViewModel>> Handle(GetUsersQuery request, CancellationToken cancellationToken)
         {
-            var users = await _myBlogDbContext.UserDetails.Include(x => x.Blogs).Select(x => new UserListViewModel
+            var users = await _myBlogDbContext.UserDetails.Select(x => new UserListViewModel
             {
                 UserName = x.UserName,
                 Adderss = x.Address,
-                Email = x.Email,
-                FullName = $"{x.FirstName} {x.LastName}",
+                FullName = x.Name.FullName,
                 Id = x.Id,
-                NoOfBlogs = x.Blogs.Count()
+                //NoOfBlogs = x.User.Blogs.Count()
             }).ToListAsync();
 
             return users;

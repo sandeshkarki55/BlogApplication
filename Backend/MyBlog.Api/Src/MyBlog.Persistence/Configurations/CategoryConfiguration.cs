@@ -15,10 +15,6 @@ namespace MyBlog.Persistence.Configurations
 
             builder.HasIndex(x => x.Name)
                 .IsUnique();
-
-            builder.HasMany(x => x.Blogs)
-                .WithOne(x => x.Category)
-                .HasForeignKey(x=>x.CategoryId);
         }
     }
 }

@@ -23,11 +23,8 @@ namespace MyBlog.Application.Users.Commands.AddUser
             {
                 UserName = request.UserName,
                 Address = request.Address,
-                Email = request.Email,
                 FacebookUrl = request.FacebookUrl,
-                FirstName = request.FacebookUrl,
                 GithubUrl = request.GithubUrl,
-                LastName = request.LastName,
                 LinkedinUrl = request.LinkedinUrl,
                 TwitterUrl = request.TwitterUrl
             };

@@ -21,8 +21,9 @@ namespace MyBlog.Persistence.Configurations
             builder.Property(x => x.Description)
                 .IsRequired();
 
-            builder.Property(x => x.UserName)
-                .HasMaxLength(50);
+            builder.Property(x => x.UserDetailId)
+                .HasColumnName("UserDetailId")
+                .IsRequired();
 
             builder.Property(x => x.ShortDescription)
                 .HasMaxLength(350)
