@@ -1,5 +1,6 @@
 ﻿using MediatR;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using MyBlog.API.Models.Common;
@@ -35,8 +36,6 @@ namespace MyBlog.API.Controllers
         [ProducesResponseType(204)]
         public async Task<IActionResult> SaveBlog(AddBlogCommand command)
         {
-            command.UserName = "sandeshkarki";
-
             await _mediator.Send(command, CancellationToken);
             return NoContent();
         }

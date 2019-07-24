@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace MyBlog.Application.Accounts.Commands
+namespace MyBlog.Application.Accounts.Commands.RegisterUser
 {
     public class RegisterUserCommand : IRequest
     {

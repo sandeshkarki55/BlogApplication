@@ -8,7 +8,7 @@ using MyBlog.Domain.Entities;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MyBlog.Application.Accounts.Commands
+namespace MyBlog.Application.Accounts.Commands.RegisterUser
 {
     public class RegisterUserCommandHandler : IRequestHandler<RegisterUserCommand>
     {

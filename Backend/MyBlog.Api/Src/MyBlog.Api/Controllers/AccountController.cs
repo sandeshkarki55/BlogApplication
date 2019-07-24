@@ -1,9 +1,10 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Identity;
+
 using Microsoft.AspNetCore.Mvc;
 
-using MyBlog.Application.Accounts.Commands;
-using MyBlog.Domain.Entities;
+using MyBlog.Application.Accounts.Commands.Login;
+using MyBlog.Application.Accounts.Commands.RegisterUser;
+
 using System.Threading.Tasks;
 
 namespace MyBlog.API.Controllers
@@ -25,6 +26,13 @@ namespace MyBlog.API.Controllers
         {
             await _mediator.Send(command);
             return NoContent();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginCommand command)
+        {
+            var token = await _mediator.Send(command);
+            return Ok(token);
         }
     }
 }
