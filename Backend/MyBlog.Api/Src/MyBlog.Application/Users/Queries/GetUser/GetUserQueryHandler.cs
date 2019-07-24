@@ -34,9 +34,8 @@ namespace MyBlog.Application.Users.Queries.GetUser
                 UserName = user.UserName,
                 Address = user.Address,
                 FacebookUrl = user.FacebookUrl,
-                //FirstName = user.FirstName,
+                FullName = user.Name.FullName,
                 GithubUrl = user.GithubUrl,
-                //LastName = user.LastName,
                 LinkedinUrl = user.LinkedinUrl,
                 TwitterUrl = user.TwitterUrl
             };

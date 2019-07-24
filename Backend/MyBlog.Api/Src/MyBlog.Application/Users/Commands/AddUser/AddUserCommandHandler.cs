@@ -2,6 +2,7 @@
 
 using MyBlog.Application.Interfaces;
 using MyBlog.Domain.Entities;
+using MyBlog.Domain.ValueObjects;
 
 using System.Threading;
 using System.Threading.Tasks;
@@ -26,7 +27,8 @@ namespace MyBlog.Application.Users.Commands.AddUser
                 FacebookUrl = request.FacebookUrl,
                 GithubUrl = request.GithubUrl,
                 LinkedinUrl = request.LinkedinUrl,
-                TwitterUrl = request.TwitterUrl
+                TwitterUrl = request.TwitterUrl,
+                Name = new PersonName(request.FirstName, request.LastName)
             };
 
             await _myBlogDbContext.UserDetails.AddAsync(user);

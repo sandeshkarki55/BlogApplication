@@ -27,7 +27,7 @@ namespace MyBlog.Application.Blogs.Commands.AddBlog
                 Description = request.Description,
                 IsDraft = request.IsDraft,
                 CategoryId = request.CategoryId,
-                //UserName = request.UserName
+                UserDetailId = request.UserDetailId
             };
 
             var htmlTagStrippedDescription = HtmlStripper.StripHTML(request.Description);
