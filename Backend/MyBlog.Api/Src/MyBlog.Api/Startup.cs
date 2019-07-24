@@ -69,12 +69,14 @@ namespace MyBlog.API
                 });
             });
 
-            services.AddHostedService<StartupTask>();
+            services.AddHostedService<StartupMigrationTask>();
 
             var applicationAssembly = Assembly.GetAssembly(typeof(RequestLogBehavior<>));
             services.AddMediatR(applicationAssembly);
 
             services.AddScoped<CustomExceptionFilterAttribute>();
+
+            services.AddApplicationInsightsTelemetry();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
