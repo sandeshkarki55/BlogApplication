@@ -28,6 +28,11 @@ namespace MyBlog.API.Filters
             {
                 statusCode = HttpStatusCode.NotFound;
             }
+            else if (context.Exception is InvalidCredentialsException)
+            {
+                statusCode = HttpStatusCode.Unauthorized;
+            }
+
 
             context.HttpContext.Response.ContentType = "application/json";
             context.HttpContext.Response.StatusCode = (int)statusCode;

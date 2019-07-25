@@ -7,8 +7,13 @@ import { ClientLayoutComponent } from './modules/client/components/client-layout
 import { AdminLayoutComponent } from './modules/admin/components/admin-layout/admin-layout.component';
 import { HomeComponent } from './modules/client/components/home/components/home/home.component';
 import { PageNotFoundComponent } from './modules/client/components/shared/components/page-not-found/page-not-found.component';
+import { LoginComponent } from './modules/admin/components/account/login/login.component';
 
 const routes: Routes = [
+    {
+        path: 'admin/login',
+        component: LoginComponent
+    },
     {
         path: "admin",
         component: AdminLayoutComponent,

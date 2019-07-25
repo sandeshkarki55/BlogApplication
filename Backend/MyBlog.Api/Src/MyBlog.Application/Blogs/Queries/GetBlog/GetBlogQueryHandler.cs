@@ -7,6 +7,7 @@ using MyBlog.Application.Interfaces;
 using MyBlog.Domain.Entities;
 
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -23,25 +24,22 @@ namespace MyBlog.Application.Blogs.Queries.GetBlog
 
         public async Task<BlogDetailViewModel> Handle(GetBlogQuery request, CancellationToken cancellationToken)
         {
-            var blog = await _context.Blogs.Include(x => x.Category).FirstOrDefaultAsync(x => x.Id == request.Id);
+            var blog = await _context.Blogs.Select(x => new BlogDetailViewModel {
+                Id = x.Id,
+                Description = x.Description,
+                CategoryName = x.Category.Name,
+                PostedDate = Convert.ToDateTime(x.PostedDate),
+                Tags = x.Tags,
+                Title = x.Title,
+                AuthorName = x.Author.Name.FullName
+            }).FirstOrDefaultAsync(x => x.Id == request.Id);
 
             if (blog == null)
             {
                 throw new NotFoundException(nameof(Blog), request.Id);
             }
 
-            var viewModel = new BlogDetailViewModel
-            {
-                Id = blog.Id,
-                Description = blog.Description,
-                CategoryName = blog.Category.Name,
-                PostedDate = Convert.ToDateTime(blog.PostedDate),
-                Tags = blog.Tags,
-                Title = blog.Title,
-                AuthorName = blog.Author.Name.FullName
-            };
-
-            return viewModel;
+            return blog;
         }
     }
 }

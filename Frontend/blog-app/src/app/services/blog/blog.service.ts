@@ -10,15 +10,20 @@ import { RecentBlogViewModel } from 'src/app/models/blog/recent.blog.view.model'
   providedIn: 'root'
 })
 export class BlogService {
-
-  constructor() { }
+  headers: any;
+  constructor() {
+    let token = localStorage.getItem('token');
+    this.headers = {
+      "Authorization": `Bearer ${token}`
+    };
+  }
 
   async getBlogs(): Promise<AxiosResponse<ResponseModel<BlogListViewModel[]>>> {
     return await axios.get(`${environment.backendUri}api/blog`);
   }
 
   async saveBlog(blog: BlogCreateViewModel): Promise<AxiosResponse<ResponseModel<any>>> {
-    return await axios.post(`${environment.backendUri}api/blog`, blog);
+    return await axios.post(`${environment.backendUri}api/blog`, blog, { headers: this.headers });
   }
 
   async getBlog(id: number): Promise<AxiosResponse<ResponseModel<BlogDetailViewModel>>> {

@@ -33,6 +33,7 @@ namespace MyBlog.API.Controllers
         /// <returns></returns>
         /// <response code="204">When blog is saved successfully.</response>
         [HttpPost]
+        [Authorize]
         [ProducesResponseType(204)]
         public async Task<IActionResult> SaveBlog(AddBlogCommand command)
         {

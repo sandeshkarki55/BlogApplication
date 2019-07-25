@@ -6,10 +6,16 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class UserService {
+  headers: any;
 
-  constructor() { }
+  constructor() {
+    let token = localStorage.getItem('token');
+    this.headers = {
+      "Authorization": `Bearer ${token}`
+    };
+  }
 
   async getUserSocialLinks(userName: string): Promise<AxiosResponse<ResponseModel<UserSocialLinksViewModel>>> {
-    return await axios.get(`${environment.backendUri}api/user/${userName}/SocialLinks`);
+    return await axios.get(`${environment.backendUri}api/user/${userName}/SocialLinks`, { headers: this.headers });
   }
 }

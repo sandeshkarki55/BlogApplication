@@ -108,7 +108,7 @@ namespace MyBlog.API.Controllers
         [HttpGet("{userName}/SocialLinks")]
         public async Task<IActionResult> GetUserSocialLinks([FromRoute]string userName)
         {
-            var userSocialLinks = await _mediator.Send(new GetUserSocialLinksQuery { UserName = userName });
+            var userSocialLinks = await _mediator.Send(new GetUserSocialLinksQuery());
 
             return Ok(new ResponseModel
             {

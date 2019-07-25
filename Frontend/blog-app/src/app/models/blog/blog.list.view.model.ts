@@ -2,7 +2,7 @@ export interface BlogListViewModel {
     Id: Number;
     Title: string;
     ShortDescription: string;
-    UserName: string;
+    AuthorName: string;
     PostedDate: Date;
     Tags: string;
     CategoryName: string;

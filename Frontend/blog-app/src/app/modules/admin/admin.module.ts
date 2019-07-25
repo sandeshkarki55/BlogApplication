@@ -7,16 +7,19 @@ import { CreateUserComponent } from './components/user/create-user/create-user.c
 import { UserListComponent } from './components/user/user-list/user-list.component';
 import { AdminLayoutComponent } from './components/admin-layout/admin-layout.component';
 import { RouterModule } from '@angular/router';
+import { LoginComponent } from './components/account/login/login.component';
 
 @NgModule({
   declarations: [
     CreateBlogFormComponent,
     CreateUserComponent,
     UserListComponent,
-    AdminLayoutComponent
+    AdminLayoutComponent,
+    LoginComponent
   ],
   exports: [
-    CreateBlogFormComponent
+    CreateBlogFormComponent,
+    LoginComponent
   ],
   imports: [
     CommonModule,

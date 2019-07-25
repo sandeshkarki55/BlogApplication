@@ -28,7 +28,7 @@ namespace MyBlog.API.Controllers
             return NoContent();
         }
 
-        [HttpPost]
+        [HttpPost(nameof(Login))]
         public async Task<IActionResult> Login(LoginCommand command)
         {
             var token = await _mediator.Send(command);
