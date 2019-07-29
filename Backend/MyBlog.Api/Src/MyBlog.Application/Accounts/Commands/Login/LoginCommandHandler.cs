@@ -48,7 +48,9 @@ namespace MyBlog.Application.Accounts.Commands.Login
             }
 
             var tokenHandler = new JwtSecurityTokenHandler();
-            var key = Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]);
+
+            var signingKeyString = _configuration.GetValue<string>("Jwt:Key");
+            var key = Encoding.UTF8.GetBytes(signingKeyString);
 
             var userClaims = await _userManager.GetClaimsAsync(user);
             var userDetail = await _myBlogDbContext.UserDetails.FirstOrDefaultAsync(x => x.UserName.Equals(user.UserName));

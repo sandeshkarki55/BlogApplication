@@ -60,6 +60,8 @@ namespace MyBlog.API
             })
                 .AddJwtBearer(options =>
                 {
+                    var signingKeyString = Configuration.GetValue<string>("Jwt:Key");
+
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuer = false,
@@ -68,7 +70,7 @@ namespace MyBlog.API
                         ValidateIssuerSigningKey = true,
                         ValidIssuer = "",
                         ValidAudience = "",
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(signingKeyString))
                     };
                 });
 
