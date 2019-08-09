@@ -8,6 +8,8 @@ import { AdminLayoutComponent } from './modules/admin/components/admin-layout/ad
 import { HomeComponent } from './modules/client/components/home/components/home/home.component';
 import { PageNotFoundComponent } from './modules/client/components/shared/components/page-not-found/page-not-found.component';
 import { LoginComponent } from './modules/admin/components/account/login/login.component';
+import { AuthGuardService } from './services/authentication/guard/auth.guard.service';
+import { CategoryTableComponent } from './modules/admin/components/category/category-table/category-table.component';
 
 const routes: Routes = [
     {
@@ -21,8 +23,13 @@ const routes: Routes = [
             {
                 path: 'blog/create',
                 component: CreateBlogFormComponent
+            },
+            {
+                path: 'category',
+                component: CategoryTableComponent
             }
-        ]
+        ],
+        canActivate: [AuthGuardService]
     },
     {
         path: '',

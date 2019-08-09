@@ -8,6 +8,8 @@ import { UserListComponent } from './components/user/user-list/user-list.compone
 import { AdminLayoutComponent } from './components/admin-layout/admin-layout.component';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from './components/account/login/login.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { CategoryTableComponent } from './components/category/category-table/category-table.component';
 
 @NgModule({
   declarations: [
@@ -15,11 +17,14 @@ import { LoginComponent } from './components/account/login/login.component';
     CreateUserComponent,
     UserListComponent,
     AdminLayoutComponent,
-    LoginComponent
+    LoginComponent,
+    SidebarComponent,
+    CategoryTableComponent
   ],
   exports: [
     CreateBlogFormComponent,
-    LoginComponent
+    LoginComponent,
+    CategoryTableComponent
   ],
   imports: [
     CommonModule,

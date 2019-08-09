@@ -1,1 +1,18 @@
-<router-outlet></router-outlet>
+<div class="container-fluid no-padding-x">
+  <nav class="navbar navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+      <img src="assets/images/image-temp.jpeg" width="30" height="30" class="d-inline-block align-top" alt="">
+      Admin
+    </a>
+  </nav>
+  <div class="row">
+    <div class="col-md-2">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="col-md-10 mt-2">
+      <div class="container">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

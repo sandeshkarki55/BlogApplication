@@ -1,11 +1,13 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Authorization;
+
 using Microsoft.AspNetCore.Mvc;
 
 using MyBlog.API.Models.Common;
 using MyBlog.Application.Categories.Commands.AddCategory;
 using MyBlog.Application.Categories.Commands.DeleteCategory;
+using MyBlog.Application.Categories.Models;
 using MyBlog.Application.Categories.Queries.GetCategories;
+using MyBlog.Application.Categories.Queries.GetCategoriesDataTable;
 using MyBlog.Application.Categories.Queries.GetCategory;
 
 using System.Collections.Generic;
@@ -93,6 +95,20 @@ namespace MyBlog.API.Controllers
         {
             await _mediator.Send(new DeleteCategoryCommand { Id = id }, CancellationToken);
             return NoContent();
+        }
+
+        /// <summary>
+        /// Gets data for datatble
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        /// <response code="204">Category fetched successfully.</response>
+        [HttpPost("DtResult")]
+        [ProducesResponseType(200)]
+        public async Task<IActionResult> GetDataTableResult([FromBody]GetCategoriesDataTableQuery query)
+        {
+            var response = await _mediator.Send(query);
+            return Ok(response);
         }
     }
 }

@@ -2,6 +2,7 @@
 
 using Microsoft.EntityFrameworkCore;
 
+using MyBlog.Application.Categories.Models;
 using MyBlog.Application.Interfaces;
 
 using System.Collections.Generic;
