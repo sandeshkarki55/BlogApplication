@@ -10,6 +10,7 @@ import { PageNotFoundComponent } from './modules/client/components/shared/compon
 import { LoginComponent } from './modules/admin/components/account/login/login.component';
 import { AuthGuardService } from './services/authentication/guard/auth.guard.service';
 import { CategoryTableComponent } from './modules/admin/components/category/category-table/category-table.component';
+import { CreateCategoryFormComponent } from './modules/admin/components/category/create-category-form/create-category-form.component';
 
 const routes: Routes = [
     {
@@ -27,6 +28,10 @@ const routes: Routes = [
             {
                 path: 'category',
                 component: CategoryTableComponent
+            },
+            {
+                path: 'category/create',
+                component: CreateCategoryFormComponent
             }
         ],
         canActivate: [AuthGuardService]

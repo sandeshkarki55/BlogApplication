@@ -1,5 +1,5 @@
 ﻿using MediatR;
-
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using MyBlog.API.Models.Common;
@@ -20,6 +20,7 @@ namespace MyBlog.API.Controllers
     [Route("api/[controller]")]
     [Produces("application/json")]
 
+    [Authorize]
     public class CategoryController : BaseController
     {
         private readonly IMediator _mediator;
@@ -50,6 +51,7 @@ namespace MyBlog.API.Controllers
         /// <response code="200">Return all categories from database.</response>
         [HttpGet]
         [ProducesResponseType(200)]
+        [AllowAnonymous]
         public async Task<IActionResult> GetAll()
         {
             List<CategoryListViewModel> categories = await _mediator.Send(new GetCategoriesQuery());

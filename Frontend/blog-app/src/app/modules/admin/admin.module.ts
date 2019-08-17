@@ -10,6 +10,7 @@ import { RouterModule } from '@angular/router';
 import { LoginComponent } from './components/account/login/login.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { CategoryTableComponent } from './components/category/category-table/category-table.component';
+import { CreateCategoryFormComponent } from './components/category/create-category-form/create-category-form.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { CategoryTableComponent } from './components/category/category-table/cat
     AdminLayoutComponent,
     LoginComponent,
     SidebarComponent,
-    CategoryTableComponent
+    CategoryTableComponent,
+    CreateCategoryFormComponent
   ],
   exports: [
     CreateBlogFormComponent,
